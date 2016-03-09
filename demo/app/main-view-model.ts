@@ -7,19 +7,11 @@ export class HelloWorldModel extends observable.Observable {
         super();
 
         // Initialize default values.
-        this.counter = 42;
-        this.set("message", this.counter + " taps left");
-        this.set("hint", "Default Hint");
-    }
-
-    public tapAction() {
-        this.counter--;
-        if (this.counter <= 0) {
-            this.set("message", "Hoorraaay! You unlocked the NativeScript clicker achievement!");
-        }
-        else {
-            this.set("message", this.counter + " taps left")
-        }
+        this.set('error', '');
+        this.set('hint', 'Default Demo Hint');
+        this.set('isErrorEnabled', true);
+        this.set('isHintAnimationEnabled', true);
+        this.set('isCounterEnabled', false);
     }
 }
 export var mainViewModel = new HelloWorldModel();

@@ -29,13 +29,7 @@
     "Material Design",
     "bradleygore"
   ],
-  "contributors": [
-    {
-      "name": "Brad Martin",
-      "email": "bradwaynemartin@gmail.com",
-      "url": "https://github.com/bradmartin"
-    }
-  ],
+  "contributors": [],
   "author": "Bradley Gore <bradley@bradleygore.com> (https://github.com/bradleygore)",
   "license": "MIT",
   "bugs": "https://github.com/bradleygore/nativescript-textinputlayout/issues",

@@ -4,29 +4,37 @@
   loaded="pageLoaded">
   <StackLayout>
     <TIL:TextInputLayout class="demo-text-input-layout"
+        style="margin: 10 0;"
         hint="{{ hint }}"
         error="{{ error }}"
         errorEnabled="{{ isErrorEnabled }}"
+        hintAnimationEnabled="{{ isHintAnimationEnabled }}"
+        counterEnabled="{{ isCounterEnabled }}"
         >
         <TextField text="{{ demoText }}" />
     </TIL:TextInputLayout>
 
-    <StackLayout class="properties-form">
-        <Label text="Change Properties" class="title" />
+    <Label horizontalAlignment="center" text="Change Properties" />
 
-        <TIL:TextInputLayout hint="Hint Text">
-            <TextField text="{{ hint }}" />
-        </TIL:TextInputLayout>
+    <TIL:TextInputLayout hint="Hint Text">
+        <TextField text="{{ hint }}" />
+    </TIL:TextInputLayout>
 
-        <TIL:TextInputLayout hint="Error Text">
-            <TextField text="{{ error }}" />
-        </TIL:TextInputLayout>
+    <TIL:TextInputLayout hint="Error Text">
+        <TextField text="{{ error }}" />
+    </TIL:TextInputLayout>
 
-        <StackLayout orientation="horizontal">
-            <Label text="Show Error" />
-            <Switch checked="{{ isErrorEnabled }}" />
-        </StackLayout>
-        <Button text="TAP" tap="{{ tapAction }}" />
-    </StackLayout>
+    <GridLayout rows="auto, auto, auto" columns="2*, *" style="padding: 5;">
+        <!--Hint Animation Enabled-->
+        <Label row="0" col="0" text="Animate Hint" />
+        <Switch row="0" col="1" checked="{{ isHintAnimationEnabled }}" />
+        <!--Error Enabled-->
+        <Label row="1" col="0" text="Show Error" />
+        <Switch row="1" col="1" checked="{{ isErrorEnabled }}" />
+        <!--Counter Enabled-->
+        <Label row="2" col="0" text="Show Counter" />
+        <Switch row="2" col="1" checked="{{ isCounterEnabled }}" />
+    </GridLayout>
   </StackLayout>
+
 </Page>

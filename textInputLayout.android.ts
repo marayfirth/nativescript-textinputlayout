@@ -16,9 +16,18 @@ function onHintPropertyChanged(pcData: PropertyChangeData) {
         til.android.setHint(pcData.newValue);
     }
 }
-
 (<PropertyMetadata>CommonTextInputLayout.hintProperty.metadata).onSetNativeValue = onHintPropertyChanged;
 
+// hintAnimationEnabledProperty
+function onHintAnimationEnabledPropertyChanged(pcData: PropertyChangeData) {
+    let til = <TextInputLayout>pcData.object,
+        enabled: boolean = !!pcData.newValue;
+    if (til.android) {
+        til.android.setHintAnimationEnabled(pcData.newValue);
+    }
+}
+
+(<PropertyMetadata>CommonTextInputLayout.hintAnimationEnabledProperty.metadata).onSetNativeValue = onHintAnimationEnabledPropertyChanged;
 
 // errorEnabledProperty
 function onErrorEnabledPropertyChanged(pcData: PropertyChangeData) {
@@ -42,9 +51,18 @@ function onErrorPropertyChanged(pcData: PropertyChangeData) {
         }
     }
 }
-
 (<PropertyMetadata>CommonTextInputLayout.errorProperty.metadata).onSetNativeValue = onErrorPropertyChanged;
 
+// counterEnabledProperty
+function onCounterEnabledPropertyChanged(pcData: PropertyChangeData) {
+    let til = <TextInputLayout>pcData.object,
+        enabled: boolean = !!pcData.newValue;
+    if (til.android) {
+        til.android.setCounterEnabled(pcData.newValue);
+    }
+}
+
+(<PropertyMetadata>CommonTextInputLayout.counterEnabledProperty.metadata).onSetNativeValue = onCounterEnabledPropertyChanged;
 
 export class TextInputLayout extends CommonTextInputLayout {
     _android: any;
