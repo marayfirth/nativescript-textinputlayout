@@ -1,0 +1,32 @@
+<Page
+  xmlns="http://schemas.nativescript.org/tns.xsd"
+  xmlns:TIL="nativescript-textinputlayout"
+  loaded="pageLoaded">
+  <StackLayout>
+    <TIL:TextInputLayout class="demo-text-input-layout"
+        hint="{{ hint }}"
+        error="{{ error }}"
+        errorEnabled="{{ isErrorEnabled }}"
+        >
+        <TextField text="{{ demoText }}" />
+    </TIL:TextInputLayout>
+
+    <StackLayout class="properties-form">
+        <Label text="Change Properties" class="title" />
+
+        <TIL:TextInputLayout hint="Hint Text">
+            <TextField text="{{ hint }}" />
+        </TIL:TextInputLayout>
+
+        <TIL:TextInputLayout hint="Error Text">
+            <TextField text="{{ error }}" />
+        </TIL:TextInputLayout>
+
+        <StackLayout orientation="horizontal">
+            <Label text="Show Error" />
+            <Switch checked="{{ isErrorEnabled }}" />
+        </StackLayout>
+        <Button text="TAP" tap="{{ tapAction }}" />
+    </StackLayout>
+  </StackLayout>
+</Page>

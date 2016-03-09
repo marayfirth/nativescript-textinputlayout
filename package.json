@@ -1,0 +1,47 @@
+{
+  "name": "nativescript-textinputlayout",
+  "version": "0.0.1",
+  "description": "A NativeScript plugin to provide an XML widget to implement the Material Design CardView.",
+  "main": "textInputLayout.js",
+  "nativescript": {
+    "platforms": {
+      "android": "1.6.3"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "demo.android": "npm run preparedemo; cd demo; tns prepare android; tns run android",
+    "preparedemo": "npm run build; cd demo; tns plugin remove nativescript-textinputlayout; tns plugin add ..; tns install",
+    "setup": "cd demo; npm install; cd ..; npm run build; cd demo; tns plugin add ..; cd .."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bradleygore/nativescript-textinputlayout"
+  },
+  "keywords": [
+    "NativeScript",
+    "native",
+    "script",
+    "float",
+    "floating label",
+    "android",
+    "TextInputLayout",
+    "Material Design",
+    "bradleygore"
+  ],
+  "contributors": [
+    {
+      "name": "Brad Martin",
+      "email": "bradwaynemartin@gmail.com",
+      "url": "https://github.com/bradmartin"
+    }
+  ],
+  "author": "Bradley Gore <bradley@bradleygore.com> (https://github.com/bradleygore)",
+  "license": "MIT",
+  "bugs": "https://github.com/bradleygore/nativescript-textinputlayout/issues",
+  "homepage": "https://github.com/bradleygore/nativescript-textinputlayout",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "typescript": "^1.8.7"
+  }
+}

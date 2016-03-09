@@ -1,0 +1,7 @@
+demo/
+*.png
+*.log
+
+# IDEs
+.vscode/
+.idea/
