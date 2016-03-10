@@ -43,7 +43,7 @@ counterEnabled | Whether or not a char counter should display in bottom-right of
 #### Demo
 
 <div style="text-align:center;">
-![Demo](demo.png)
+![Demo](demo.gif)
 </div>
 
 ------------------
