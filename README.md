@@ -43,7 +43,7 @@ counterEnabled | Whether or not a char counter should display in bottom-right of
 #### Demo
 
 <div style="text-align:center;">
-![Demo](demo.gif)
+    <img src="https://raw.githubusercontent.com/bradleygore/nativescript-textinputlayout/master/demo.gif" alt="nativescript-textinputlayout demo"/>
 </div>
 
 ------------------
