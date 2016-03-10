@@ -87,6 +87,8 @@ export class TextInputLayout extends CommonTextInputLayout {
             throw new Error('TextInputLayout may only have a <TextView> or <TextField> as a child');
         }
 
+        this.childLoaded = false;
+
         //some properties cannot be added until after the child text element has loaded
         function onChildLoaded() {
             this.childLoaded = true;
@@ -98,6 +100,13 @@ export class TextInputLayout extends CommonTextInputLayout {
         }
 
         child.on(View.loadedEvent, onChildLoaded, this);
+
+        function onChildUnloaded() {
+            this.childLoaded = false;
+            child.on(View.loadedEvent, onChildLoaded);
+        }
+
+        child.on(View.unloadedEvent, onChildUnloaded, this);
     }
 
     get childLoaded() { return this._childLoaded; }
