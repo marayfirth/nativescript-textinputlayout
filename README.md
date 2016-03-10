@@ -7,6 +7,13 @@
 
 ### Usage
 
+Add the android support library to your build.gradle's dependencies (and to that of the demo app if you want to run the included demo app)
+
+```
+compile "com.android.support:design:$suppotVer"
+```
+
+
 ```xml
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:TIL="nativescript-textinputlayout">
     <StackLayout>
@@ -43,7 +50,7 @@ counterEnabled | Whether or not a char counter should display in bottom-right of
 #### Demo
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/bradleygore/nativescript-textinputlayout/master/demo.gif" alt="nativescript-textinputlayout demo"/>
+    <img height="700" src="https://raw.githubusercontent.com/bradleygore/nativescript-textinputlayout/master/demo.gif" alt="nativescript-textinputlayout demo"/>
 </p>
 
 ------------------

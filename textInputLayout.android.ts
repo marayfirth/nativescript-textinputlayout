@@ -36,6 +36,9 @@ function onErrorEnabledPropertyChanged(pcData: PropertyChangeData) {
         enabled: boolean = !!pcData.newValue;
     if (til.android) {
         til.android.setErrorEnabled(enabled);
+        if (!enabled && (til.error || '').length > 0) {
+            til.error = '';
+        }
     }
 }
 (<PropertyMetadata>CommonTextInputLayout.errorEnabledProperty.metadata).onSetNativeValue = onErrorEnabledPropertyChanged;
