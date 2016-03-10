@@ -1,0 +1,56 @@
+<Page
+  xmlns="http://schemas.nativescript.org/tns.xsd"
+  xmlns:TIL="nativescript-textinputlayout">
+
+  <action-bar>
+    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="goBack"/>
+  </action-bar>
+
+  <StackLayout>
+      <TIL:TextInputLayout class="demo-text-input-layout"
+        hint="TEST"
+        errorEnabled="false"
+        hintAnimationEnabled="true"
+        counterEnabled="false">
+        <TextField text="TEST" />
+    </TIL:TextInputLayout>
+
+    <TIL:TextInputLayout class="demo-text-input-layout"
+        hint="animated hint, no error, no counter"
+        errorEnabled="false"
+        hintAnimationEnabled="true"
+        counterEnabled="false">
+
+        <TextField text="" />
+
+    </TIL:TextInputLayout>
+
+    <TIL:TextInputLayout class="demo-text-input-layout"
+        hint="non-animated hint, no error, no counter"
+        hintAnimationEnabled="false"
+        errorEnabled="false"
+        counterEnabled="false">
+
+        <TextField text=""/>
+
+    </TIL:TextInputLayout>
+
+    <TIL:TextInputLayout class="demo-text-input-layout"
+        hint="has error, no counter"
+        error="Need moar inputz!"
+        errorEnabled="true"
+        counterEnabled="false">
+
+        <TextField text="" />
+
+    </TIL:TextInputLayout>
+
+    <TIL:TextInputLayout class="demo-text-input-layout"
+        hint="has counter"
+        counterEnabled="true">
+
+        <TextField text="" />
+
+    </TIL:TextInputLayout>
+  </StackLayout>
+</Page>

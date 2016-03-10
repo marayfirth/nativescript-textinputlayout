@@ -14,3 +14,9 @@ button {
     color: #284848;
     horizontal-align: center;
 }
+
+.demo-text-input-layout {
+    background-color: #60d3d3d3;
+    margin: 5 0;
+    padding: 5 0;
+}

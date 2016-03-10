@@ -4,7 +4,6 @@
   loaded="pageLoaded">
   <StackLayout>
     <TIL:TextInputLayout class="demo-text-input-layout"
-        style="margin: 10 0;"
         hint="{{ hint }}"
         error="{{ error }}"
         errorEnabled="{{ isErrorEnabled }}"
@@ -24,7 +23,7 @@
         <TextField text="{{ error }}" />
     </TIL:TextInputLayout>
 
-    <GridLayout rows="auto, auto, auto" columns="2*, *" style="padding: 5;">
+    <GridLayout rows="auto, auto, auto, auto" columns="2*, *" style="padding: 5;">
         <!--Hint Animation Enabled-->
         <Label row="0" col="0" text="Animate Hint" />
         <Switch row="0" col="1" checked="{{ isHintAnimationEnabled }}" />
@@ -34,6 +33,8 @@
         <!--Counter Enabled-->
         <Label row="2" col="0" text="Show Counter" />
         <Switch row="2" col="1" checked="{{ isCounterEnabled }}" />
+
+        <Button text="more" row="3" colspan="2" onTap="seeMore" />
     </GridLayout>
   </StackLayout>
 

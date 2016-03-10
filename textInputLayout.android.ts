@@ -3,6 +3,7 @@ declare var android: any;
 import {PropertyChangeData} from "ui/core/dependency-observable";
 import {PropertyMetadata} from "ui/core/proxy";
 import {TextInputLayout as CommonTextInputLayout} from './textInputLayout.common';
+import {View} from "ui/core/view";
 import {TextView} from 'ui/text-view';
 import {TextField} from 'ui/text-field';
 
@@ -44,11 +45,8 @@ function onErrorEnabledPropertyChanged(pcData: PropertyChangeData) {
 function onErrorPropertyChanged(pcData: PropertyChangeData) {
     let til = <TextInputLayout>pcData.object,
         error: string = pcData.newValue || '';
-    if (til.android) {
+    if (til.android && til.childLoaded) {
         til.android.setError(error);
-        if (error.length > 0) {
-            this.errorEnabled = true;
-        }
     }
 }
 (<PropertyMetadata>CommonTextInputLayout.errorProperty.metadata).onSetNativeValue = onErrorPropertyChanged;
@@ -66,6 +64,7 @@ function onCounterEnabledPropertyChanged(pcData: PropertyChangeData) {
 
 export class TextInputLayout extends CommonTextInputLayout {
     _android: any;
+    _childLoaded: boolean;
 
     constructor() {
         super();
@@ -74,9 +73,9 @@ export class TextInputLayout extends CommonTextInputLayout {
     _createUI() {
         this._android = new android.support.design.widget.TextInputLayout(this._context);
 
-        if (this.hint && this.hint.length > 0) {
-            this.android.setHint(this.hint);
-        }
+        // if (this.hint && this.hint.length > 0) {
+        //     this.android.setHint(this.hint);
+        // }
     }
 
     /**
@@ -87,7 +86,22 @@ export class TextInputLayout extends CommonTextInputLayout {
         if (!(child instanceof TextView || child instanceof TextField)) {
             throw new Error('TextInputLayout may only have a <TextView> or <TextField> as a child');
         }
+
+        //some properties cannot be added until after the child text element has loaded
+        function onChildLoaded() {
+            this.childLoaded = true;
+            if (this.error && this.error.length > 0) {
+                console.log(`setting error to ${this.error}`);
+                this.android.setError(this.error);
+            }
+            child.off(View.loadedEvent, onChildLoaded);
+        }
+
+        child.on(View.loadedEvent, onChildLoaded, this);
     }
+
+    get childLoaded() { return this._childLoaded; }
+    set childLoaded(val: boolean) { this._childLoaded = val; }
 
     get android() { return this._android; }
     get _nativeView() { return this._android; }

@@ -1,5 +1,6 @@
 demo/
 *.png
+*.gif
 *.log
 
 # IDEs
