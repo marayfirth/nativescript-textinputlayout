@@ -35,10 +35,11 @@ function onErrorEnabledPropertyChanged(pcData: PropertyChangeData) {
     let til = <TextInputLayout>pcData.object,
         enabled: boolean = !!pcData.newValue;
     if (til.android) {
-        til.android.setErrorEnabled(enabled);
         if (!enabled && (til.error || '').length > 0) {
             til.error = '';
         }
+
+        til.android.setErrorEnabled(enabled);
     }
 }
 (<PropertyMetadata>CommonTextInputLayout.errorEnabledProperty.metadata).onSetNativeValue = onErrorEnabledPropertyChanged;
@@ -47,9 +48,13 @@ function onErrorEnabledPropertyChanged(pcData: PropertyChangeData) {
 // NOTE: Android natively sets errorEnabled to true if this is not null
 function onErrorPropertyChanged(pcData: PropertyChangeData) {
     let til = <TextInputLayout>pcData.object,
-        error: string = pcData.newValue || '';
+        error: string = pcData.newValue || '',
+        enabled: boolean = til.errorEnabled;
     if (til.android && til.childLoaded) {
         til.android.setError(error);
+        if (!enabled && error.length > 0) {
+            til.errorEnabled = true;
+        }
     }
 }
 (<PropertyMetadata>CommonTextInputLayout.errorProperty.metadata).onSetNativeValue = onErrorPropertyChanged;
@@ -69,52 +74,56 @@ export class TextInputLayout extends CommonTextInputLayout {
     _android: any;
     _childLoaded: boolean;
 
+    get childLoaded() { return this._childLoaded; }
+    set childLoaded(val: boolean) { this._childLoaded = val; }
+
+    get android() { return this._android; }
+    get _nativeView() { return this._android; }
+
     constructor() {
         super();
     }
 
     _createUI() {
         this._android = new android.support.design.widget.TextInputLayout(this._context);
-
-        // if (this.hint && this.hint.length > 0) {
-        //     this.android.setHint(this.hint);
-        // }
     }
 
     /**
      * Callback that gets called when a child element is added.
      * The TextInputLayout can only accept TextView or TextField, so do appropriate checking here.
      */
-    _registerLayoutChild(child: TextView | TextField) {
-        if (!(child instanceof TextView || child instanceof TextField)) {
-            throw new Error('TextInputLayout may only have a <TextView> or <TextField> as a child');
-        }
+    _onTextFieldChanged(oldChild: View, newChild: TextView | TextField): void {
 
         this.childLoaded = false;
 
         //some properties cannot be added until after the child text element has loaded
         function onChildLoaded() {
+
+            //Need this for when navigating back to a historical view
+            if (!this.android) { this._createUI(); }
+
+            this.android.addView(this.textField.android);
             this.childLoaded = true;
+
+            if (this.errorEnabled) {
+                this.android.setErrorEnabled(this.errorEnabled);
+            }
             if (this.error && this.error.length > 0) {
-                console.log(`setting error to ${this.error}`);
                 this.android.setError(this.error);
             }
-            child.off(View.loadedEvent, onChildLoaded);
-        }
 
-        child.on(View.loadedEvent, onChildLoaded, this);
+            this.textField.off(View.loadedEvent, onChildLoaded);
+            this.textField.on(View.unloadedEvent, onChildUnloaded, this);
+        }
 
         function onChildUnloaded() {
             this.childLoaded = false;
-            child.on(View.loadedEvent, onChildLoaded);
+            this.textField.off(View.unloadedEvent, onChildUnloaded);
+            this.textField.on(View.loadedEvent, onChildLoaded, this);
         }
 
-        child.on(View.unloadedEvent, onChildUnloaded, this);
+        if (this.textField) {
+            this.textField.on(View.loadedEvent, onChildLoaded, this);
+        }
     }
-
-    get childLoaded() { return this._childLoaded; }
-    set childLoaded(val: boolean) { this._childLoaded = val; }
-
-    get android() { return this._android; }
-    get _nativeView() { return this._android; }
 }

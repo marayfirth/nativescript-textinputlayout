@@ -49,13 +49,18 @@ counterEnabled | Whether or not a char counter should display in bottom-right of
 
 #### Demo
 
+To run the demo locally, run the following commands from the root folder after pulling down this repo:
+`npm run setup` and `npm run demo.android`
+
 <p align="center">
-    <img height="700" src="https://raw.githubusercontent.com/bradleygore/nativescript-textinputlayout/master/demo.gif" alt="nativescript-textinputlayout demo"/>
+    <img height="750" src="https://raw.githubusercontent.com/bradleygore/nativescript-textinputlayout/master/demo.gif" alt="NativeScript Text Input Layout demo"/>
 </p>
 
 ------------------
 
 ### Attributions
+
+[Nathanael Andersion](https://github.com/NathanaelA) - He helped me with what (LayoutBase, ContentView, View, ...) to subclass off of and helped me understand more of the nuances of each.
 
 [Brad Martin](https://github.com/bradmartin) - I used his {N} plugins as guides for this one, and pestered him when I had questions.
 
