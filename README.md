@@ -7,6 +7,9 @@
 
 ### Usage
 
+Install the plugin by running this command in your project root:
+`tns plugin add nativescript-textinputlayout`
+
 Add the android support library to your build.gradle's dependencies (and to that of the demo app if you want to run the included demo app)
 
 ```
