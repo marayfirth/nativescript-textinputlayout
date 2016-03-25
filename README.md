@@ -63,7 +63,7 @@ To run the demo locally, run the following commands from the root folder after p
 
 ### Attributions
 
-[Nathanael Andersion](https://github.com/NathanaelA) - He helped me with what (LayoutBase, ContentView, View, ...) to subclass off of and helped me understand more of the nuances of each.
+[Nathanael Anderson](https://github.com/NathanaelA) - He helped me with what (LayoutBase, ContentView, View, ...) to subclass off of and helped me understand more of the nuances of each.
 
 [Brad Martin](https://github.com/bradmartin) - I used his {N} plugins as guides for this one, and pestered him when I had questions.
 
