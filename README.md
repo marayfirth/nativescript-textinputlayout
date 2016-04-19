@@ -26,6 +26,7 @@ compile "com.android.support:design:$suppotVer"
             error="{{ error }}"
             errorEnabled="{{ isErrorEnabled }}"
             hintAnimationEnabled="{{ isHintAnimationEnabled }}"
+            hintTextAppearance="SpecialTextInputLayout"
             counterEnabled="{{ isCounterEnabled }}">
 
             <!--ONE child element can be added, MUST be either TextField or TextView-->
@@ -48,7 +49,26 @@ hint | Text that shows up in the hint, and floating label | String | ""
 error | Text that will display as error message and make the widget look invalid | String | ""
 errorEnabled | Whether or not an error is enabled for the widget.  If no error, it won't pad the bottom so much.  However, if you set the error attr, it auto-sets this property under the hood to true | Boolean | false
 hintAnimationEnabled | Whether or not the 'float' action of the label should be animated | Boolean | true
+hintTextAppearance | Name of the style definition to apply to the floating label | String | ""
 counterEnabled | Whether or not a char counter should display in bottom-right of widget | Boolean | false
+
+#### Styling
+Several of the styles for the TextInputLayout need to be declared in the Theme for your app.
+This top-level set of styles will apply to the entire app.
+One way to do this is to have a style defined whose parent is AppTheme (the theme that NativeScript generates) and then set the app to use the new theme by updating the AndroidManifest.xml file. There are examples of this in the Demo.
+
+There is one property that you can use to style the floating label. It's power is limited - it only applies when the field is focused - but it's something.
+Simply create a style rule, such as the one below, and set the TextInputLayout's hintTextAppearance property to the name of that style rule (see sample TextInputLayout XML above):
+
+```xml
+<!-- app/App_Resources/Android/values/appStyles.xml -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="SpecialTextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#F9D02A</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+</resources>
+```
 
 #### Demo
 

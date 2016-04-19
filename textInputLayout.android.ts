@@ -24,11 +24,23 @@ function onHintAnimationEnabledPropertyChanged(pcData: PropertyChangeData) {
     let til = <TextInputLayout>pcData.object,
         enabled: boolean = !!pcData.newValue;
     if (til.android) {
-        til.android.setHintAnimationEnabled(pcData.newValue);
+        til.android.setHintAnimationEnabled(enabled);
     }
 }
-
 (<PropertyMetadata>CommonTextInputLayout.hintAnimationEnabledProperty.metadata).onSetNativeValue = onHintAnimationEnabledPropertyChanged;
+
+// hintAppearanceProperty
+function onHintAppearancePropertyChanged(pcData: PropertyChangeData) {
+    let til = <TextInputLayout>pcData.object;
+
+    if(til.hintTextAppearance) {
+        let resId = getStyleResourceId(til._context, til.hintTextAppearance);
+        if (resId) {
+            til.android.setHintTextAppearance(resId);
+        }
+    }
+}
+(<PropertyMetadata>CommonTextInputLayout.hintTextAppearanceProperty.metadata).onSetNativeValue = onHintAppearancePropertyChanged;
 
 // errorEnabledProperty
 function onErrorEnabledPropertyChanged(pcData: PropertyChangeData) {
@@ -64,11 +76,16 @@ function onCounterEnabledPropertyChanged(pcData: PropertyChangeData) {
     let til = <TextInputLayout>pcData.object,
         enabled: boolean = !!pcData.newValue;
     if (til.android) {
-        til.android.setCounterEnabled(pcData.newValue);
+        til.android.setCounterEnabled(enabled);
     }
 }
 
 (<PropertyMetadata>CommonTextInputLayout.counterEnabledProperty.metadata).onSetNativeValue = onCounterEnabledPropertyChanged;
+
+
+function getStyleResourceId(context: any, name: string) {
+    return context.getResources().getIdentifier(name, 'style', context.getPackageName());
+}
 
 export class TextInputLayout extends CommonTextInputLayout {
     _android: any;
@@ -86,6 +103,13 @@ export class TextInputLayout extends CommonTextInputLayout {
 
     _createUI() {
         this._android = new android.support.design.widget.TextInputLayout(this._context);
+
+        //if (this.hintTextAppearance) {
+        //    let resId = getStyleResourceId(this._context, this.hintTextAppearance);
+        //    if (resId) {
+        //        this._android.setHintTextAppearance(resId);
+        //    }
+        //}
     }
 
     /**
@@ -105,12 +129,8 @@ export class TextInputLayout extends CommonTextInputLayout {
             this.android.addView(this.textField.android);
             this.childLoaded = true;
 
-            if (this.errorEnabled) {
-                this.android.setErrorEnabled(this.errorEnabled);
-            }
-            if (this.error && this.error.length > 0) {
-                this.android.setError(this.error);
-            }
+            this.android.setErrorEnabled(this.errorEnabled);
+            this.android.setError(this.error);
 
             this.textField.off(View.loadedEvent, onChildLoaded);
             this.textField.on(View.unloadedEvent, onChildUnloaded, this);

@@ -9,8 +9,10 @@
         errorEnabled="{{ isErrorEnabled }}"
         hintAnimationEnabled="{{ isHintAnimationEnabled }}"
         counterEnabled="{{ isCounterEnabled }}"
+        hintTextAppearance="StyledTIL"
+        style="font-family: Arvo-Bold;"
         >
-        <TextField text="{{ demoText }}" />
+        <TextField text="{{ demoText }}" style="font-family: Arvo-Bold;"/>
     </TIL:TextInputLayout>
 
     <Label horizontalAlignment="center" text="Change Properties" />
