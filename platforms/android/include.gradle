@@ -1,7 +1,7 @@
 android {
     productFlavors {
-        "nativescript-textinputlayout" {
-            dimension "nativescript-textinputlayout"
+        "nativescripttextinputlayout" {
+            dimension "nativescripttextinputlayout"
         }
     }
 }
