@@ -103,13 +103,6 @@ export class TextInputLayout extends CommonTextInputLayout {
 
     _createUI() {
         this._android = new android.support.design.widget.TextInputLayout(this._context);
-
-        //if (this.hintTextAppearance) {
-        //    let resId = getStyleResourceId(this._context, this.hintTextAppearance);
-        //    if (resId) {
-        //        this._android.setHintTextAppearance(resId);
-        //    }
-        //}
     }
 
     /**
@@ -126,7 +119,17 @@ export class TextInputLayout extends CommonTextInputLayout {
             //Need this for when navigating back to a historical view
             if (!this.android) { this._createUI(); }
 
-            this.android.addView(this.textField.android);
+            let existingEditText = this.android.getEditText();
+
+            if (existingEditText) {
+                if (existingEditText !== this.textField.android) {
+                    this.android.removeView(this.android.editText)
+                    this.android.addView(this.textField.android);
+                }
+            } else {
+                this.android.addView(this.textField.android);
+            }
+
             this.childLoaded = true;
 
             this.android.setErrorEnabled(this.errorEnabled);

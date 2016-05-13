@@ -13,7 +13,6 @@ node_modules
 .node_repl_history
 
 # Compiled JS files and their .map files
-*.js
 *.js.map
 
 # Demo
@@ -22,6 +21,7 @@ demo/*.d.ts
 demo/*.js.map
 demo/platforms
 demo/node_modules
+demo/hooks
 
 # IDEs
 .vscode/
