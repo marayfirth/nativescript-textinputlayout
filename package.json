@@ -4,9 +4,7 @@
   "description": "A NativeScript plugin to provide an XML widget to implement the Material Design TextInputLayout.",
   "main": "textInputLayout.js",
   "nativescript": {
-    "platforms": {
-      "android": "1.6.3"
-    }
+    "id": "com.bradleygore.textinputlayout"
   },
   "scripts": {
     "build": "tsc",
@@ -36,6 +34,11 @@
   "homepage": "https://github.com/bradleygore/nativescript-textinputlayout",
   "readmeFilename": "README.md",
   "devDependencies": {
+    "babel-traverse": "6.22.1",
+    "babel-types": "6.22.0",
+    "babylon": "6.15.0",
+    "lazy": "1.0.11",
     "typescript": "^1.8.7"
-  }
+  },
+  "dependencies": {}
 }

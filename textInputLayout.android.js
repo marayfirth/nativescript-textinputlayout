@@ -90,21 +90,25 @@ var TextInputLayout = (function (_super) {
             if (!this.android) {
                 this._createUI();
             }
-            var existingEditText = this.android.getEditText();
+            var layoutParams = new android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT), existingEditText = this.android.getEditText();
             if (existingEditText) {
                 if (existingEditText !== this.textField.android) {
-                    this.android.removeView(this.android.editText);
-                    this.android.addView(this.textField.android);
+                    this.android.removeView(this.android.getEditText());
+                    this.android.addView(this.textField.android, 0, layoutParams);
                 }
             }
             else {
-                this.android.addView(this.textField.android);
+                this.android.addView(this.textField.android, 0, layoutParams);
             }
             this.childLoaded = true;
             this.android.setErrorEnabled(this.errorEnabled);
             this.android.setError(this.error);
             this.textField.off(view_1.View.loadedEvent, onChildLoaded);
             this.textField.on(view_1.View.unloadedEvent, onChildUnloaded, this);
+            var txtValue = this.textField.android.getText();
+            this.textField.android.setText('');
+            this.textField.android.setText(txtValue);
+            this.android.drawableStateChanged();
         }
         function onChildUnloaded() {
             this.childLoaded = false;

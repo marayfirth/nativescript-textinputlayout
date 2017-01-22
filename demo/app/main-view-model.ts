@@ -1,6 +1,6 @@
-import observable = require("data/observable");
+import {Observable} from 'data/observable';
 
-export class HelloWorldModel extends observable.Observable {
+export class HelloWorldModel extends Observable {
     private counter: number;
 
     constructor() {
