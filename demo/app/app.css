@@ -16,7 +16,14 @@ button {
 }
 
 .demo-text-input-layout {
-    background-color: #60d3d3d3;
+    background-color: #d3d3d3;
     margin: 5 0;
     padding: 5 0;
 }
+
+/*
+In many cases you may want to use the NativeScript core theme instead
+of writing your own CSS rules. For a full list of class names in the theme
+refer to http://docs.nativescript.org/ui/theme.
+*/
+@import 'nativescript-theme-core/css/core.light.css';

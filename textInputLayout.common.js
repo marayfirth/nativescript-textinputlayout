@@ -7,8 +7,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 var view_1 = require("ui/core/view");
 var dependency_observable_1 = require("ui/core/dependency-observable");
 var proxy_1 = require("ui/core/proxy");
-var text_view_1 = require('ui/text-view');
-var text_field_1 = require('ui/text-field');
+var text_view_1 = require("ui/text-view");
+var text_field_1 = require("ui/text-field");
 var counterEnabledProperty = new dependency_observable_1.Property("counterEnabled", "TextInputLayout", new proxy_1.PropertyMetadata(false, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
 var errorEnabledProperty = new dependency_observable_1.Property("errorEnabled", "TextInputLayout", new proxy_1.PropertyMetadata(true, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
 var errorProperty = new dependency_observable_1.Property("error", "TextInputLayout", new proxy_1.PropertyMetadata('', dependency_observable_1.PropertyMetadataSettings.None));
@@ -18,7 +18,7 @@ var hintProperty = new dependency_observable_1.Property("hint", "TextInputLayout
 var TextInputLayout = (function (_super) {
     __extends(TextInputLayout, _super);
     function TextInputLayout() {
-        _super.call(this);
+        return _super.call(this) || this;
     }
     Object.defineProperty(TextInputLayout.prototype, "textField", {
         get: function () { return this._textField; },
@@ -95,12 +95,12 @@ var TextInputLayout = (function (_super) {
     };
     TextInputLayout.prototype._onTextFieldChanged = function (oldTextField, newTextField) {
     };
-    TextInputLayout.counterEnabledProperty = counterEnabledProperty;
-    TextInputLayout.errorEnabledProperty = errorEnabledProperty;
-    TextInputLayout.errorProperty = errorProperty;
-    TextInputLayout.hintAnimationEnabledProperty = hintAnimationEnabledProperty;
-    TextInputLayout.hintTextAppearanceProperty = hintTextAppearanceProperty;
-    TextInputLayout.hintProperty = hintProperty;
     return TextInputLayout;
 }(view_1.View));
+TextInputLayout.counterEnabledProperty = counterEnabledProperty;
+TextInputLayout.errorEnabledProperty = errorEnabledProperty;
+TextInputLayout.errorProperty = errorProperty;
+TextInputLayout.hintAnimationEnabledProperty = hintAnimationEnabledProperty;
+TextInputLayout.hintTextAppearanceProperty = hintTextAppearanceProperty;
+TextInputLayout.hintProperty = hintProperty;
 exports.TextInputLayout = TextInputLayout;
