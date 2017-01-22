@@ -115,28 +115,37 @@ export class TextInputLayout extends CommonTextInputLayout {
 
         //some properties cannot be added until after the child text element has loaded
         function onChildLoaded() {
-
+            // let layoutParams = new android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.MATCH_PARENT, 0);
+            
             //Need this for when navigating back to a historical view
             if (!this.android) { this._createUI(); }
 
-            let existingEditText = this.android.getEditText();
+            let layoutParams = new android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT),
+                existingEditText = this.android.getEditText();
 
             if (existingEditText) {
                 if (existingEditText !== this.textField.android) {
-                    this.android.removeView(this.android.editText)
-                    this.android.addView(this.textField.android);
+                    this.android.removeView(this.android.getEditText())
+                    this.android.addView(this.textField.android, 0, layoutParams);
                 }
             } else {
-                this.android.addView(this.textField.android);
+                this.android.addView(this.textField.android, 0, layoutParams);
             }
 
             this.childLoaded = true;
 
             this.android.setErrorEnabled(this.errorEnabled);
             this.android.setError(this.error);
-
             this.textField.off(View.loadedEvent, onChildLoaded);
             this.textField.on(View.unloadedEvent, onChildUnloaded, this);
+
+            // sometimes hint text isn't immediately triggered to move when navigating back to a prior view.
+            // this triggers it via brute force :(
+            let txtValue = this.textField.android.getText();
+
+            this.textField.android.setText('');
+            this.textField.android.setText(txtValue);
+            this.android.drawableStateChanged();
         }
 
         function onChildUnloaded() {
