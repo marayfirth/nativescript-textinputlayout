@@ -2,13 +2,13 @@
   "nativescript": {
     "id": "com.bradleygore.tildemo",
     "tns-android": {
-      "version": "2.4.1"
+      "version": "2.5.0"
     }
   },
   "dependencies": {
-    "nativescript-textinputlayout": "file:..",
+    "nativescript-textinputlayout": "file:///Users/bradley/Documents/projects/personal/nativescript-textinputlayout",
     "nativescript-theme-core": "^0.2.1",
-    "tns-core-modules": "2.4.4"
+    "tns-core-modules": "^2.5.2"
   },
   "devDependencies": {
     "babel-traverse": "6.22.1",
@@ -17,6 +17,7 @@
     "lazy": "1.0.11",
     "nativescript-dev-android-snapshot": "^0.*.*",
     "nativescript-dev-typescript": "^0.3.2",
-    "typescript": "^2.1.5"
+    "tns-platform-declarations": "^2.5.2",
+    "typescript": "^2.2.2"
   }
 }

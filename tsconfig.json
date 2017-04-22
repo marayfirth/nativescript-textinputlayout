@@ -4,14 +4,20 @@
         "module": "commonjs",
         "removeComments": true,
         "experimentalDecorators": true,
-        "sourceMap": false,
-        "declaration": false
+        "noEmitHelpers": true,
+        "declaration": true,
+        "noLib": true
     },
     "files": [
-      "demo/node_modules/tns-core-modules/tns-core-modules.d.ts",
+      "node_modules/typescript/lib/lib.core.d.ts",
+      "manual_typings/base.d.ts",
+      "node_modules/tns-core-modules/tns-core-modules.d.ts",
+      "node_modules/tns-platform-declarations/android/android17.d.ts",
+      "node_modules/tns-platform-declarations/ios/ios.d.ts",
+      "node_modules/tns-platform-declarations/android/org.nativescript.widgets.d.ts",
+      "textInputLayout.d.ts",
       "textInputLayout.common.ts",
-      "textInputLayout.android.ts",
-      "textInputLayout.d.ts"
+      "textInputLayout.android.ts"
     ],
     "compileOnSave": false
 }
