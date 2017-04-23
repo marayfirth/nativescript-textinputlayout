@@ -11,6 +11,10 @@ export declare class TextInputLayout extends CommonTextInputLayout {
     private _textField;
     textField: TextField | TextView;
     readonly _childrenCount: number;
+    counterEnabled: any;
+    errorEnabled: any;
+    hintAnimationEnabled: any;
+    hintTextAppearance: any;
     constructor();
     _createUI(): void;
     _addChildFromBuilder(name: string, child: TextField | TextView): void;

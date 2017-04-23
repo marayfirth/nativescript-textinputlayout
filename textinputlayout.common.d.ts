@@ -9,14 +9,21 @@ export declare class TextInputLayout extends View implements definition.TextInpu
     static hintTextAppearanceProperty: Property;
     static errorEnabledProperty: Property;
     static titleProperty: Property;
+    static selectedTitleColorProperty: Property;
+    static tintColorProperty: Property;
+    static lineColorProperty: Property;
+    static selectedLineColorProperty: Property;
+    static lineHeightProperty: Property;
+    static selectedLineHeightProperty: Property;
+    static errorColorProperty: Property;
+    static iconColorProperty: Property;
+    static selectedIconColorProperty: Property;
+    static iconFontProperty: Property;
     static iconTextProperty: Property;
+    static iconMarginBottomProperty: Property;
+    static iconMarginLeftProperty: Property;
+    static iconRotationDegreesProperty: Property;
     constructor();
-    counterEnabled: any;
-    errorEnabled: any;
-    error: any;
-    hintAnimationEnabled: any;
-    hintTextAppearance: any;
     hint: any;
-    title: any;
-    iconText: any;
+    error: any;
 }

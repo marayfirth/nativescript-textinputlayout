@@ -105,6 +105,30 @@ var TextInputLayout = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(TextInputLayout.prototype, "counterEnabled", {
+        get: function () { return this._getValue(textInputLayout_common_1.TextInputLayout.counterEnabledProperty); },
+        set: function (value) { this._setValue(textInputLayout_common_1.TextInputLayout.counterEnabledProperty, value); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TextInputLayout.prototype, "errorEnabled", {
+        get: function () { return this._getValue(textInputLayout_common_1.TextInputLayout.errorEnabledProperty); },
+        set: function (value) { this._setValue(textInputLayout_common_1.TextInputLayout.errorEnabledProperty, value); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TextInputLayout.prototype, "hintAnimationEnabled", {
+        get: function () { return this._getValue(textInputLayout_common_1.TextInputLayout.hintAnimationEnabledProperty); },
+        set: function (value) { this._setValue(textInputLayout_common_1.TextInputLayout.hintAnimationEnabledProperty, value); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TextInputLayout.prototype, "hintTextAppearance", {
+        get: function () { return this._getValue(textInputLayout_common_1.TextInputLayout.hintTextAppearanceProperty); },
+        set: function (value) { this._setValue(textInputLayout_common_1.TextInputLayout.hintTextAppearanceProperty, value); },
+        enumerable: true,
+        configurable: true
+    });
     TextInputLayout.prototype._createUI = function () {
         this._android = new android.support.design.widget.TextInputLayout(this._context);
     };

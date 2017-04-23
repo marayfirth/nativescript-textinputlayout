@@ -123,6 +123,19 @@ export class TextInputLayout extends CommonTextInputLayout {
         return 0;
     }
 
+    get counterEnabled() { return this._getValue(CommonTextInputLayout.counterEnabledProperty); }
+    set counterEnabled(value) { this._setValue(CommonTextInputLayout.counterEnabledProperty, value); }
+
+    get errorEnabled() { return this._getValue(CommonTextInputLayout.errorEnabledProperty); }
+    set errorEnabled(value) { this._setValue(CommonTextInputLayout.errorEnabledProperty, value); }
+
+
+    get hintAnimationEnabled() { return this._getValue(CommonTextInputLayout.hintAnimationEnabledProperty); }
+    set hintAnimationEnabled(value) { this._setValue(CommonTextInputLayout.hintAnimationEnabledProperty, value); }
+
+    get hintTextAppearance() { return this._getValue(CommonTextInputLayout.hintTextAppearanceProperty); }
+    set hintTextAppearance(value) { this._setValue(CommonTextInputLayout.hintTextAppearanceProperty, value); }
+
     constructor() {
         super();
     }

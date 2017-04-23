@@ -15,7 +15,7 @@
     "debug.android": "npm run preparedemo; cd demo; tns debug android --debug-brk",
     "demo.ios": "npm run preparedemo; cd demo; tns emulate ios",
     "debug.ios": "npm run preparedemo; cd demo; tns debug ios --debug-brk",
-    "preparedemo": "npm run build; cd demo; tns plugin remove nativescript-textinputlayout; tns plugin add ..; tns install",
+    "preparedemo": "npm run build; cd demo; tns plugin remove ..; tns plugin add ..; tns install",
     "setup": "cd demo; npm install; cd ..; npm run build; cd demo; tns plugin add ..; cd .."
   },
   "repository": {
