@@ -18,7 +18,8 @@
       "node_modules/tns-platform-declarations/android/org.nativescript.widgets.d.ts",
       "textInputLayout.d.ts",
       "textInputLayout.common.ts",
-      "textInputLayout.android.ts"
+      "textInputLayout.android.ts",
+      "textInputLayout.ios.ts"
     ],
     "compileOnSave": false,
     "exclude": [

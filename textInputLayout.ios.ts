@@ -28,7 +28,6 @@ export class TextInputLayout extends CommonTextInputLayout {
     get _nativeView() {return this._ios;}
 
     constructor() {
-        console.break('INSIDE TIL CONSTRUCTOR!');
         super();
         TextField.call(this);
         //this._ios = this.iconText ? SkyFloatingLabelTextField.alloc().init(CGRectMake(0, 0, 100, 50)) : SkyFloatingLabelTextFieldWithIcon.alloc().init(CGRectMake(0, 0, 100, 50));
