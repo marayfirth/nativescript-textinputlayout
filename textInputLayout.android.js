@@ -1,6 +1,9 @@
 "use strict";
-var textInputLayout_common_1 = require('./textInputLayout.common');
+Object.defineProperty(exports, "__esModule", { value: true });
+var textInputLayout_common_1 = require("./textInputLayout.common");
 var view_1 = require("ui/core/view");
+var text_view_1 = require("ui/text-view");
+var text_field_1 = require("ui/text-field");
 function onHintPropertyChanged(pcData) {
     var til = pcData.object;
     if (til.android) {
@@ -58,7 +61,7 @@ function getStyleResourceId(context, name) {
 var TextInputLayout = (function (_super) {
     __extends(TextInputLayout, _super);
     function TextInputLayout() {
-        _super.call(this);
+        return _super.call(this) || this;
     }
     Object.defineProperty(TextInputLayout.prototype, "childLoaded", {
         get: function () { return this._childLoaded; },
@@ -76,8 +79,45 @@ var TextInputLayout = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(TextInputLayout.prototype, "textField", {
+        get: function () { return this._textField; },
+        set: function (tf) {
+            var old = this._textField;
+            if (this._textField) {
+                this._removeView(this._textField);
+            }
+            this._textField = tf;
+            if (this._textField) {
+                this._addView(tf);
+            }
+            this._onTextFieldChanged(old, tf);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TextInputLayout.prototype, "_childrenCount", {
+        get: function () {
+            if (this._textField) {
+                return 1;
+            }
+            return 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
     TextInputLayout.prototype._createUI = function () {
         this._android = new android.support.design.widget.TextInputLayout(this._context);
+    };
+    TextInputLayout.prototype._addChildFromBuilder = function (name, child) {
+        if (!(child instanceof text_view_1.TextView || child instanceof text_field_1.TextField)) {
+            throw new Error('TextInputLayout may only have a <TextView> or <TextField> as a child');
+        }
+        this.textField = child;
+    };
+    TextInputLayout.prototype._eachChildView = function (callback) {
+        if (this._textField) {
+            callback(this._textField);
+        }
     };
     TextInputLayout.prototype._onTextFieldChanged = function (oldChild, newChild) {
         this.childLoaded = false;

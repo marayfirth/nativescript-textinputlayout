@@ -6,7 +6,8 @@
         "experimentalDecorators": true,
         "noEmitHelpers": true,
         "declaration": true,
-        "noLib": true
+        "noLib": true,
+        "skipLibCheck": true
     },
     "files": [
       "node_modules/typescript/lib/lib.core.d.ts",
@@ -19,5 +20,8 @@
       "textInputLayout.common.ts",
       "textInputLayout.android.ts"
     ],
-    "compileOnSave": false
+    "compileOnSave": false,
+    "exclude": [
+        "./demo"
+    ]
 }

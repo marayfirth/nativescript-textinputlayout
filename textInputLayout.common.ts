@@ -1,66 +1,75 @@
 import definition = require('textInputLayout');
 import {View} from "ui/core/view";
 import {Property, PropertyMetadataSettings} from "ui/core/dependency-observable";
+// import {CssProperty} from 'ui/core/properties/properties';
 import {PropertyMetadata} from "ui/core/proxy";
 import {TextView} from 'ui/text-view';
 import {TextField} from 'ui/text-field';
 
-const counterEnabledProperty: Property = new Property(
-    "counterEnabled",
-    "TextInputLayout",
-    new PropertyMetadata(false, PropertyMetadataSettings.AffectsLayout)
-);
-const errorEnabledProperty: Property = new Property(
-    "errorEnabled",
-    "TextInputLayout",
-    new PropertyMetadata(true, PropertyMetadataSettings.AffectsLayout)
-);
+const TIL = 'TextInputLayout';
+
 const errorProperty: Property = new Property(
     "error",
-    "TextInputLayout",
+    TIL,
     new PropertyMetadata('', PropertyMetadataSettings.None)
 );
+
+// NOTE: This is 'placeholder' for ios
+const hintProperty: Property = new Property(
+    "hint",
+    TIL,
+    new PropertyMetadata('', PropertyMetadataSettings.None)
+);
+
+
+// android-only properties
 const hintAnimationEnabledProperty: Property = new Property(
     "hintAnimationEnabled",
-    "TextInputLayout",
+    TIL,
     new PropertyMetadata(true, PropertyMetadataSettings.None)
 );
 const hintTextAppearanceProperty: Property = new Property(
     "hintTextAppearance",
-    "TextInputLayout",
+    TIL,
     new PropertyMetadata(undefined)
 );
-const hintProperty: Property = new Property(
-    "hint",
-    "TextInputLayout",
-    new PropertyMetadata('', PropertyMetadataSettings.None)
+const counterEnabledProperty: Property = new Property(
+    "counterEnabled",
+    TIL,
+    new PropertyMetadata(false, PropertyMetadataSettings.AffectsLayout)
+);
+const errorEnabledProperty: Property = new Property(
+    "errorEnabled",
+    TIL,
+    new PropertyMetadata(true, PropertyMetadataSettings.AffectsLayout)
 );
 
+// ios-only properties
+const titleProperty: Property = new Property(
+    "title",
+    TIL,
+    new PropertyMetadata(false, PropertyMetadataSettings.AffectsLayout)
+);
+const iconTextProperty: Property = new Property(
+    "iconText",
+    TIL,
+    new PropertyMetadata(true, PropertyMetadataSettings.AffectsLayout)
+);
+
+
 export class TextInputLayout extends View implements definition.TextInputLayout {
-    public static counterEnabledProperty: Property = counterEnabledProperty;
-    public static errorEnabledProperty: Property = errorEnabledProperty;
     public static errorProperty: Property = errorProperty;
+    public static hintProperty: Property = hintProperty;
+    
+    //android-only
+    public static counterEnabledProperty: Property = counterEnabledProperty;
     public static hintAnimationEnabledProperty: Property = hintAnimationEnabledProperty;
     public static hintTextAppearanceProperty: Property = hintTextAppearanceProperty;
-    public static hintProperty: Property = hintProperty;
+    public static errorEnabledProperty: Property = errorEnabledProperty;
 
-    private _textField: View;
-
-    get textField(): View { return this._textField; }
-    set textField(tf: View) {
-        let old: View = this._textField;
-        if (this._textField) {
-            this._removeView(this._textField);
-        }
-
-        this._textField = tf;
-
-        if (this._textField) {
-            this._addView(tf);
-        }
-
-        this._onTextFieldChanged(old, tf);
-    }
+    //ios-only
+    public static titleProperty: Property = titleProperty;
+    public static iconTextProperty: Property = iconTextProperty;
 
     constructor() {
         super();
@@ -84,34 +93,10 @@ export class TextInputLayout extends View implements definition.TextInputLayout 
     get hint() { return this._getValue(hintProperty); }
     set hint(value) { this._setValue(hintProperty, value + ''); }
 
-    get _childrenCount(): number {
-        if (this._textField) {
-            return 1;
-        }
+    get title() { return this._getValue(titleProperty); }
+    set title(value) { this._setValue(titleProperty, value+''); }
 
-        return 0;
-    }
-
-    /**
-     * Callback that gets called when a child element is added.
-     * The TextInputLayout can only accept TextView or TextField, so do appropriate checking here.
-     */
-    public _addChildFromBuilder(name: string, child: TextField | TextView): void {
-        if (!(child instanceof TextView || child instanceof TextField)) {
-            throw new Error('TextInputLayout may only have a <TextView> or <TextField> as a child');
-        }
-
-        this.textField = child;
-    }
-
-    public _eachChildView(callback: (child: View) => boolean) {
-        if (this._textField) {
-            callback(this._textField);
-        }
-    }
-
-    public _onTextFieldChanged(oldTextField: View, newTextField: View) {
-        //to be overridden in subclasses as different things may need done in ios vs android
-    }
+    get iconText() { return this._getValue(titleProperty); }
+    set iconText(value) { this._setValue(iconTextProperty, value+''); }
 }
 

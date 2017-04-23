@@ -97,12 +97,56 @@ export class TextInputLayout extends CommonTextInputLayout {
     get android() { return this._android; }
     get _nativeView() { return this._android; }
 
+    private _textField: TextField | TextView;
+
+    get textField(): TextField | TextView { return this._textField; }
+    set textField(tf: TextField | TextView) {
+        let old: View = this._textField;
+        if (this._textField) {
+            this._removeView(this._textField);
+        }
+
+        this._textField = tf;
+
+        if (this._textField) {
+            this._addView(tf);
+        }
+
+        this._onTextFieldChanged(old, tf);
+    }
+
+    get _childrenCount(): number {
+        if (this._textField) {
+            return 1;
+        }
+
+        return 0;
+    }
+
     constructor() {
         super();
     }
 
     _createUI() {
         this._android = new android.support.design.widget.TextInputLayout(this._context);
+    }
+
+    /**
+     * Callback that gets called when a child element is added.
+     * The TextInputLayout can only accept TextView or TextField, so do appropriate checking here.
+     */
+    public _addChildFromBuilder(name: string, child: TextField | TextView): void {
+        if (!(child instanceof TextView || child instanceof TextField)) {
+            throw new Error('TextInputLayout may only have a <TextView> or <TextField> as a child');
+        }
+
+        this.textField = child;
+    }
+
+    public _eachChildView(callback: (child: View) => boolean) {
+        if (this._textField) {
+            callback(this._textField);
+        }
     }
 
     /**

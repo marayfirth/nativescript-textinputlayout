@@ -1,36 +1,22 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var view_1 = require("ui/core/view");
 var dependency_observable_1 = require("ui/core/dependency-observable");
 var proxy_1 = require("ui/core/proxy");
-var text_view_1 = require('ui/text-view');
-var text_field_1 = require('ui/text-field');
-var counterEnabledProperty = new dependency_observable_1.Property("counterEnabled", "TextInputLayout", new proxy_1.PropertyMetadata(false, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
-var errorEnabledProperty = new dependency_observable_1.Property("errorEnabled", "TextInputLayout", new proxy_1.PropertyMetadata(true, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
-var errorProperty = new dependency_observable_1.Property("error", "TextInputLayout", new proxy_1.PropertyMetadata('', dependency_observable_1.PropertyMetadataSettings.None));
-var hintAnimationEnabledProperty = new dependency_observable_1.Property("hintAnimationEnabled", "TextInputLayout", new proxy_1.PropertyMetadata(true, dependency_observable_1.PropertyMetadataSettings.None));
-var hintTextAppearanceProperty = new dependency_observable_1.Property("hintTextAppearance", "TextInputLayout", new proxy_1.PropertyMetadata(undefined));
-var hintProperty = new dependency_observable_1.Property("hint", "TextInputLayout", new proxy_1.PropertyMetadata('', dependency_observable_1.PropertyMetadataSettings.None));
+var TIL = 'TextInputLayout';
+var errorProperty = new dependency_observable_1.Property("error", TIL, new proxy_1.PropertyMetadata('', dependency_observable_1.PropertyMetadataSettings.None));
+var hintProperty = new dependency_observable_1.Property("hint", TIL, new proxy_1.PropertyMetadata('', dependency_observable_1.PropertyMetadataSettings.None));
+var hintAnimationEnabledProperty = new dependency_observable_1.Property("hintAnimationEnabled", TIL, new proxy_1.PropertyMetadata(true, dependency_observable_1.PropertyMetadataSettings.None));
+var hintTextAppearanceProperty = new dependency_observable_1.Property("hintTextAppearance", TIL, new proxy_1.PropertyMetadata(undefined));
+var counterEnabledProperty = new dependency_observable_1.Property("counterEnabled", TIL, new proxy_1.PropertyMetadata(false, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
+var errorEnabledProperty = new dependency_observable_1.Property("errorEnabled", TIL, new proxy_1.PropertyMetadata(true, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
+var titleProperty = new dependency_observable_1.Property("title", TIL, new proxy_1.PropertyMetadata(false, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
+var iconTextProperty = new dependency_observable_1.Property("iconText", TIL, new proxy_1.PropertyMetadata(true, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
 var TextInputLayout = (function (_super) {
     __extends(TextInputLayout, _super);
     function TextInputLayout() {
-        _super.call(this);
+        return _super.call(this) || this;
     }
-    Object.defineProperty(TextInputLayout.prototype, "textField", {
-        get: function () { return this._textField; },
-        set: function (tf) {
-            var old = this._textField;
-            if (this._textField) {
-                this._removeView(this._textField);
-            }
-            this._textField = tf;
-            if (this._textField) {
-                this._addView(tf);
-            }
-            this._onTextFieldChanged(old, tf);
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(TextInputLayout.prototype, "counterEnabled", {
         get: function () { return this._getValue(counterEnabledProperty); },
         set: function (value) { this._setValue(counterEnabledProperty, value); },
@@ -67,35 +53,26 @@ var TextInputLayout = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TextInputLayout.prototype, "_childrenCount", {
-        get: function () {
-            if (this._textField) {
-                return 1;
-            }
-            return 0;
-        },
+    Object.defineProperty(TextInputLayout.prototype, "title", {
+        get: function () { return this._getValue(titleProperty); },
+        set: function (value) { this._setValue(titleProperty, value + ''); },
         enumerable: true,
         configurable: true
     });
-    TextInputLayout.prototype._addChildFromBuilder = function (name, child) {
-        if (!(child instanceof text_view_1.TextView || child instanceof text_field_1.TextField)) {
-            throw new Error('TextInputLayout may only have a <TextView> or <TextField> as a child');
-        }
-        this.textField = child;
-    };
-    TextInputLayout.prototype._eachChildView = function (callback) {
-        if (this._textField) {
-            callback(this._textField);
-        }
-    };
-    TextInputLayout.prototype._onTextFieldChanged = function (oldTextField, newTextField) {
-    };
-    TextInputLayout.counterEnabledProperty = counterEnabledProperty;
-    TextInputLayout.errorEnabledProperty = errorEnabledProperty;
-    TextInputLayout.errorProperty = errorProperty;
-    TextInputLayout.hintAnimationEnabledProperty = hintAnimationEnabledProperty;
-    TextInputLayout.hintTextAppearanceProperty = hintTextAppearanceProperty;
-    TextInputLayout.hintProperty = hintProperty;
+    Object.defineProperty(TextInputLayout.prototype, "iconText", {
+        get: function () { return this._getValue(titleProperty); },
+        set: function (value) { this._setValue(iconTextProperty, value + ''); },
+        enumerable: true,
+        configurable: true
+    });
     return TextInputLayout;
 }(view_1.View));
+TextInputLayout.errorProperty = errorProperty;
+TextInputLayout.hintProperty = hintProperty;
+TextInputLayout.counterEnabledProperty = counterEnabledProperty;
+TextInputLayout.hintAnimationEnabledProperty = hintAnimationEnabledProperty;
+TextInputLayout.hintTextAppearanceProperty = hintTextAppearanceProperty;
+TextInputLayout.errorEnabledProperty = errorEnabledProperty;
+TextInputLayout.titleProperty = titleProperty;
+TextInputLayout.iconTextProperty = iconTextProperty;
 exports.TextInputLayout = TextInputLayout;
