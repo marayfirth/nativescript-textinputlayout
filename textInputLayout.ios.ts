@@ -17,14 +17,13 @@ function onErrorPropertyChanged(pcData: PropertyChangeData) {
 }
 (<PropertyMetadata>CommonTextInputLayout.errorProperty.metadata).onSetNativeValue = onErrorPropertyChanged;
 
-// TextField handles this property, as well as things like textColor...
-// function onHintPropertyChanged(pcData: PropertyChangeData) {
-//     let til = <TextInputLayout>pcData.object;
-//     if (til.ios) {
-//         til.ios.placeholder = pcData.newValue;
-//     }
-// }
-// (<PropertyMetadata>CommonTextInputLayout.hintProperty.metadata).onSetNativeValue = onHintPropertyChanged;
+function onHintPropertyChanged(pcData: PropertyChangeData) {
+    let til = <TextInputLayout>pcData.object;
+    if (til.ios) {
+        til.ios.placeholder = pcData.newValue;
+    }
+}
+(<PropertyMetadata>CommonTextInputLayout.hintProperty.metadata).onSetNativeValue = onHintPropertyChanged;
 
 function onTitlePropertyChanged(pcData: PropertyChangeData) {
     let til = <TextInputLayout>pcData.object;
@@ -32,7 +31,7 @@ function onTitlePropertyChanged(pcData: PropertyChangeData) {
         til.ios.title = pcData.newValue;
     }
 }
-(<PropertyMetadata>CommonTextInputLayout.hintProperty.metadata).onSetNativeValue = onTitlePropertyChanged;
+(<PropertyMetadata>CommonTextInputLayout.titleProperty.metadata).onSetNativeValue = onTitlePropertyChanged;
 
 function onSelectedTitleColorPropertyChanged(pcData: PropertyChangeData) {
     let til = <TextInputLayout>pcData.object;
@@ -153,6 +152,9 @@ export class TextInputLayout extends TextField implements CommonTextInputLayout 
     get ios() {return this._ios;}
     get _nativeView() {return this._ios;}
 
+    get hint() { return this._getValue(CommonTextInputLayout.hintProperty); }
+    set hint(value) { this._setValue(CommonTextInputLayout.hintProperty, value + ''); }
+
     get error() { return this._getValue(CommonTextInputLayout.errorProperty) }
     set error(val) { this._setValue(CommonTextInputLayout.errorProperty, val + ''); }
 
@@ -180,11 +182,17 @@ export class TextInputLayout extends TextField implements CommonTextInputLayout 
     get errorColor() { return this._getValue(CommonTextInputLayout.errorColorProperty); }
     set errorColor(value) { this._setValue(CommonTextInputLayout.errorColorProperty, value); }
 
-    get iconText() { return this._getValue(CommonTextInputLayout.titleProperty); }
+    get iconText() { return this._getValue(CommonTextInputLayout.iconTextProperty); }
     set iconText(value) { this._setValue(CommonTextInputLayout.iconTextProperty, value+''); }
     
     get iconFont() { return this._getValue(CommonTextInputLayout.iconFontProperty); }
-    set iconFont(value) { this._setValue(CommonTextInputLayout.iconFontProperty, value); }
+    set iconFont(value) { 
+        if (value instanceof UIFont) { 
+            this._setValue(CommonTextInputLayout.iconFontProperty, value);
+        } else {
+            console.warn('TIL:iconFont can only be set to an instance of UIFont');
+        }
+    }
     
     get iconColor() { return this._getValue(CommonTextInputLayout.iconColorProperty); }
     set iconColor(value) { this._setValue(CommonTextInputLayout.iconColorProperty, value); }
@@ -203,6 +211,20 @@ export class TextInputLayout extends TextField implements CommonTextInputLayout 
 
     constructor() {
         super();
-        this._ios = this.iconText ? (new SkyFloatingLabelTextField(CGRectMake(0, 0, 100, 50))) : (new SkyFloatingLabelTextFieldWithIcon(CGRectMake(0, 0, 100, 50)));
+
+        global.TILS = global.TILS || [];
+        global.TILS.push(this);
+
+        // TextField delegate will take care of rending to the appropriate size, just pass in zeros here
+        this._ios = new SkyFloatingLabelTextField(CGRectMake(0, 0, 0, 0));
+    }
+}
+
+export class TextInputLayoutWithIcon extends TextInputLayout {
+    constructor() {
+        super();
+
+        // TextField delegate will take care of rending to the appropriate size, just pass in zeros here
+        this._ios = new SkyFloatingLabelTextFieldWithIcon(CGRectMake(0,0,0,0));
     }
 }

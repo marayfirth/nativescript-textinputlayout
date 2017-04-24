@@ -2,44 +2,107 @@
   xmlns="http://schemas.nativescript.org/tns.xsd"
   xmlns:TIL="nativescript-textinputlayout"
   loaded="pageLoaded">
-  <StackLayout>
-    <TIL:TextInputLayout class="demo-text-input-layout"
-        hint="{{ hint }}"
-        error="{{ error }}"
-        android:errorEnabled="{{ isErrorEnabled }}"
-        android:hintAnimationEnabled="{{ isHintAnimationEnabled }}"
-        android:counterEnabled="{{ isCounterEnabled }}"
-        android:hintTextAppearance="StyledTIL"
-        ios:text="{{ demoText }}"
-        ios:title="{{ hint }} (title)"
-        style="font-family: Arvo-Bold;"
-        >
-        <TextField text="{{ demoText }}" style="font-family: Arvo-Bold;"/>
-    </TIL:TextInputLayout>
+    <android>
+        <StackLayout>
+            <TIL:TextInputLayout class="demo-text-input-layout"
+                hint="{{ hint }}"
+                error="{{ error }}"
+                android:errorEnabled="{{ isErrorEnabled }}"
+                android:hintAnimationEnabled="{{ isHintAnimationEnabled }}"
+                android:counterEnabled="{{ isCounterEnabled }}"
+                android:hintTextAppearance="StyledTIL"
+                style="font-family: Arvo-Bold;"
+                >
+                <TextField text="{{ demoText }}" style="font-family: Arvo-Bold;"/>
+            </TIL:TextInputLayout>
 
-    <Label horizontalAlignment="center" text="Change Properties" />
+            <Label horizontalAlignment="center" text="Change Properties" />
 
-    <TIL:TextInputLayout hint="Hint Text" ios:title="The Hint Text" ios:text="{{ hint }}" ios:hint="What hint?">
-        <TextField text="{{ hint }}" />
-    </TIL:TextInputLayout>
+            <TIL:TextInputLayout hint="Hint Text" ios:title="The Hint Text" ios:text="{{ hint }}" ios:hint="What hint?">
+                <TextField text="{{ hint }}" />
+            </TIL:TextInputLayout>
 
-    <TIL:TextInputLayout hint="Error Text" ios:title="The Error Text" ios:text="{{ error }}" ios:hint="What error?">
-        <TextField text="{{ error }}" />
-    </TIL:TextInputLayout>
+            <TIL:TextInputLayout hint="Error Text" ios:title="The Error Text" ios:text="{{ error }}" ios:hint="What error?">
+                <TextField text="{{ error }}" />
+            </TIL:TextInputLayout>
 
-    <GridLayout rows="auto, auto, auto, auto" columns="2*, *" style="padding: 5;">
-        <!--Hint Animation Enabled-->
-        <Label row="0" col="0" text="Animate Hint (android only)" />
-        <Switch ios:isEnabled="False" row="0" col="1" checked="{{ isHintAnimationEnabled }}" />
-        <!--Error Enabled-->
-        <Label row="1" col="0" text="Show Error (android only)" />
-        <Switch ios:isEnabled="False" row="1" col="1" checked="{{ isErrorEnabled }}" />
-        <!--Counter Enabled-->
-        <Label row="2" col="0" text="Show Counter (android only)" />
-        <Switch ios:isEnabled="False" row="2" col="1" checked="{{ isCounterEnabled }}" />
+            <GridLayout rows="auto, auto, auto, auto" columns="2*, *" style="padding: 5;">
+                <!--Hint Animation Enabled-->
+                <Label row="0" col="0" text="Animate Hint" />
+                <Switch ios:isEnabled="False" row="0" col="1" checked="{{ isHintAnimationEnabled }}" />
+                <!--Error Enabled-->
+                <Label row="1" col="0" text="Show Error" />
+                <Switch ios:isEnabled="False" row="1" col="1" checked="{{ isErrorEnabled }}" />
+                <!--Counter Enabled-->
+                <Label row="2" col="0" text="Show Counter" />
+                <Switch ios:isEnabled="False" row="2" col="1" checked="{{ isCounterEnabled }}" />
 
-        <Button text="more" row="3" colspan="2" onTap="seeMore" />
-    </GridLayout>
-  </StackLayout>
+                <Button text="more" row="3" colspan="2" onTap="seeMore" />
+            </GridLayout>
+        </StackLayout>
+    </android>
+  
+    <ios>
+        <StackLayout>
+            <TIL:TextInputLayout
+                class="til demo-text-inputlayout"
+                hint="{{ hint }}"
+                error="{{ error }}"
+                text="{{ demoText }}"
+                title="{{ title }}"
+                color="{{ error ? '#aa0000' : '#d745ff' }}"
+                tintColor="#d745ff"
+                lineColor="#d745ff"
+                selectedTitleColor="#ff45ca"
+                selectedLineColor="#7a45ff"
+                lineHeight="1.25"
+                selectedLineHeight="3.5" />
 
+            <Label class="divider" />
+
+            <Label horizontalAlignment="center" text="Change hint/error/title Properties" />
+
+            <TIL:TextInputLayout
+                class="demo-text-inputlayout"
+                hint="Name Me!"
+                text="{{ title }}"
+                title="Floating Label Text"
+                tintColor="#48c8ff"
+                lineColor="#48c8ff"
+                selectedTitleColor="#6348ff"
+                selectedLineColor="#48ff7f"
+                lineHeight="0.5"
+                selectedLineHeight="1" />
+
+            <TIL:TextInputLayout
+                class="demo-text-inputlayout"
+                hint="Gimme A Hint!"
+                text="{{ hint }}"
+                title="Hint Text"
+                tintColor="#48c8ff"
+                lineColor="#48c8ff"
+                selectedTitleColor="#6348ff"
+                selectedLineColor="#48ff7f"
+                lineHeight="0.5"
+                selectedLineHeight="1" />
+
+            <TIL:TextInputLayoutWithIcon
+                class="demo-text-inputlayout"
+                hint="Is there an error?"
+                text="{{ error }}"
+                iconFont="{{ iconFont }}"
+                iconText="{{ iconText }}"
+                selectedIconColor="#aa0000"
+                iconMarginLeft="2"
+                iconMarginBottom="2"
+                title="Error Text"
+                tintColor="#48c8ff"
+                lineColor="#48c8ff"
+                selectedTitleColor="#6348ff"
+                selectedLineColor="#48ff7f"
+                lineHeight="0.5"
+                selectedLineHeight="1" />
+        </StackLayout>
+    </ios>
+  
 </Page>

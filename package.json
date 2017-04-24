@@ -12,9 +12,9 @@
   "scripts": {
     "build": "tsc",
     "demo.android": "npm run preparedemo; cd demo; tns run android",
-    "debug.android": "npm run preparedemo; cd demo; tns debug android --debug-brk",
+    "debug.android": "npm run preparedemo; cd demo; tns debug android --emulator --debug-brk",
     "demo.ios": "npm run preparedemo; cd demo; tns emulate ios",
-    "debug.ios": "npm run preparedemo; cd demo; tns debug ios --debug-brk",
+    "debug.ios": "npm run preparedemo; cd demo; tns debug ios --emulator --debug-brk",
     "preparedemo": "npm run build; cd demo; tns plugin remove ..; tns plugin add ..; tns install",
     "setup": "cd demo; npm install; cd ..; npm run build; cd demo; tns plugin add ..; cd .."
   },

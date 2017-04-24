@@ -1,7 +1,8 @@
 import observable = require("data/observable");
 import pages = require("ui/page");
 import vmModule = require("./main-view-model");
-import * as frame from 'ui/frame';
+import frame = require('ui/frame');
+import {Font} from 'ui/styling/font';
 
 // Event handler for Page "loaded" event attached in main-page.xml
 export function pageLoaded(args: observable.EventData) {

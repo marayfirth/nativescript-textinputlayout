@@ -5,6 +5,7 @@ export declare class TextInputLayout extends TextField implements CommonTextInpu
     _childLoaded: boolean;
     readonly ios: any;
     readonly _nativeView: any;
+    hint: any;
     error: any;
     title: any;
     selectedTitleColor: any;
@@ -21,5 +22,8 @@ export declare class TextInputLayout extends TextField implements CommonTextInpu
     iconMarginBottom: any;
     iconMarginLeft: any;
     iconRotationDegrees: any;
+    constructor();
+}
+export declare class TextInputLayoutWithIcon extends TextInputLayout {
     constructor();
 }

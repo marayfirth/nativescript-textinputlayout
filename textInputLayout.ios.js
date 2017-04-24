@@ -10,13 +10,20 @@ function onErrorPropertyChanged(pcData) {
     }
 }
 textInputLayout_common_1.TextInputLayout.errorProperty.metadata.onSetNativeValue = onErrorPropertyChanged;
+function onHintPropertyChanged(pcData) {
+    var til = pcData.object;
+    if (til.ios) {
+        til.ios.placeholder = pcData.newValue;
+    }
+}
+textInputLayout_common_1.TextInputLayout.hintProperty.metadata.onSetNativeValue = onHintPropertyChanged;
 function onTitlePropertyChanged(pcData) {
     var til = pcData.object;
     if (til.ios) {
         til.ios.title = pcData.newValue;
     }
 }
-textInputLayout_common_1.TextInputLayout.hintProperty.metadata.onSetNativeValue = onTitlePropertyChanged;
+textInputLayout_common_1.TextInputLayout.titleProperty.metadata.onSetNativeValue = onTitlePropertyChanged;
 function onSelectedTitleColorPropertyChanged(pcData) {
     var til = pcData.object;
     if (til.ios && color_1.Color.isValid(pcData.newValue)) {
@@ -119,7 +126,9 @@ var TextInputLayout = (function (_super) {
     __extends(TextInputLayout, _super);
     function TextInputLayout() {
         var _this = _super.call(this) || this;
-        _this._ios = _this.iconText ? (new SkyFloatingLabelTextField(CGRectMake(0, 0, 100, 50))) : (new SkyFloatingLabelTextFieldWithIcon(CGRectMake(0, 0, 100, 50)));
+        global.TILS = global.TILS || [];
+        global.TILS.push(_this);
+        _this._ios = new SkyFloatingLabelTextField(CGRectMake(0, 0, 0, 0));
         return _this;
     }
     Object.defineProperty(TextInputLayout.prototype, "ios", {
@@ -129,6 +138,12 @@ var TextInputLayout = (function (_super) {
     });
     Object.defineProperty(TextInputLayout.prototype, "_nativeView", {
         get: function () { return this._ios; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TextInputLayout.prototype, "hint", {
+        get: function () { return this._getValue(textInputLayout_common_1.TextInputLayout.hintProperty); },
+        set: function (value) { this._setValue(textInputLayout_common_1.TextInputLayout.hintProperty, value + ''); },
         enumerable: true,
         configurable: true
     });
@@ -187,14 +202,21 @@ var TextInputLayout = (function (_super) {
         configurable: true
     });
     Object.defineProperty(TextInputLayout.prototype, "iconText", {
-        get: function () { return this._getValue(textInputLayout_common_1.TextInputLayout.titleProperty); },
+        get: function () { return this._getValue(textInputLayout_common_1.TextInputLayout.iconTextProperty); },
         set: function (value) { this._setValue(textInputLayout_common_1.TextInputLayout.iconTextProperty, value + ''); },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(TextInputLayout.prototype, "iconFont", {
         get: function () { return this._getValue(textInputLayout_common_1.TextInputLayout.iconFontProperty); },
-        set: function (value) { this._setValue(textInputLayout_common_1.TextInputLayout.iconFontProperty, value); },
+        set: function (value) {
+            if (value instanceof UIFont) {
+                this._setValue(textInputLayout_common_1.TextInputLayout.iconFontProperty, value);
+            }
+            else {
+                console.warn('TIL:iconFont can only be set to an instance of UIFont');
+            }
+        },
         enumerable: true,
         configurable: true
     });
@@ -231,3 +253,13 @@ var TextInputLayout = (function (_super) {
     return TextInputLayout;
 }(text_field_1.TextField));
 exports.TextInputLayout = TextInputLayout;
+var TextInputLayoutWithIcon = (function (_super) {
+    __extends(TextInputLayoutWithIcon, _super);
+    function TextInputLayoutWithIcon() {
+        var _this = _super.call(this) || this;
+        _this._ios = new SkyFloatingLabelTextFieldWithIcon(CGRectMake(0, 0, 0, 0));
+        return _this;
+    }
+    return TextInputLayoutWithIcon;
+}(TextInputLayout));
+exports.TextInputLayoutWithIcon = TextInputLayoutWithIcon;

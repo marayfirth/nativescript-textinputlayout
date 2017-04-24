@@ -10,14 +10,14 @@ const TIL = 'TextInputLayout';
 const errorProperty: Property = new Property(
     "error",
     TIL,
-    new PropertyMetadata('', PropertyMetadataSettings.None)
+    new PropertyMetadata('', PropertyMetadataSettings.AffectsLayout)
 );
 
 // NOTE: This is 'placeholder' for ios
 const hintProperty: Property = new Property(
     "hint",
     TIL,
-    new PropertyMetadata('', PropertyMetadataSettings.None)
+    new PropertyMetadata('', PropertyMetadataSettings.AffectsLayout)
 );
 
 
@@ -44,81 +44,83 @@ const errorEnabledProperty: Property = new Property(
 );
 
 /*** ios-only properties ***/
+
+// note: this is the floating label value 
 const titleProperty: Property = new Property(
     "title",
     TIL,
-    new PropertyMetadata(false, PropertyMetadataSettings.AffectsLayout)
+    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsLayout)
 );
 const tintColorProperty: Property = new Property(
     "tintColor",
     TIL,
-    new PropertyMetadata(true, PropertyMetadataSettings.AffectsStyle)
+    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsStyle)
 );
 
 const lineColorProperty: Property = new Property(
     "lineColor",
     TIL,
-    new PropertyMetadata(true, PropertyMetadataSettings.AffectsStyle)
+    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsStyle)
 );
 const selectedTitleColorProperty: Property = new Property(
     "selectedTitleColor",
     TIL,
-    new PropertyMetadata(true, PropertyMetadataSettings.AffectsStyle)
+    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsStyle)
 );
 const selectedLineColorProperty: Property = new Property(
     "selectedLineColor",
     TIL,
-    new PropertyMetadata(true, PropertyMetadataSettings.AffectsStyle)
+    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsStyle)
 );
 const lineHeightProperty: Property = new Property(
     "lineHeight",
     TIL,
-    new PropertyMetadata(true, PropertyMetadataSettings.AffectsLayout)
+    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsLayout)
 );
 const selectedLineHeightProperty: Property = new Property(
     "selectedLineHeight",
     TIL,
-    new PropertyMetadata(true, PropertyMetadataSettings.AffectsLayout)
+    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsLayout)
 );
 const errorColorProperty: Property = new Property(
     "errorColor",
     TIL,
-    new PropertyMetadata(true, PropertyMetadataSettings.AffectsStyle)
+    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsStyle)
 );
 const iconColorProperty: Property = new Property(
     "iconColor",
     TIL,
-    new PropertyMetadata(true, PropertyMetadataSettings.AffectsStyle)
+    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsStyle)
 );
 const selectedIconColorProperty: Property = new Property(
     "selectedIconColor",
     TIL,
-    new PropertyMetadata(true, PropertyMetadataSettings.AffectsStyle)
+    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsStyle)
 );
 const iconFontProperty: Property = new Property(
     "iconFont",
     TIL,
-    new PropertyMetadata(true, PropertyMetadataSettings.AffectsStyle)
+    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsLayout)
 );
 const iconTextProperty: Property = new Property(
     "iconText",
     TIL,
-    new PropertyMetadata(true, PropertyMetadataSettings.AffectsStyle)
+    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsLayout)
 );
 const iconMarginBottomProperty: Property = new Property(
     "iconMarginBottom",
     TIL,
-    new PropertyMetadata(true, PropertyMetadataSettings.AffectsLayout)
+    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsLayout)
 );
 const iconMarginLeftProperty: Property = new Property(
     "iconMarginLeft",
     TIL,
-    new PropertyMetadata(true, PropertyMetadataSettings.AffectsLayout)
+    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsLayout)
 );
 const iconRotationDegreesProperty: Property = new Property(
     "iconRotationDegrees",
     TIL,
-    new PropertyMetadata(true, PropertyMetadataSettings.AffectsLayout)
+    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsLayout)
 );
 
 
