@@ -152,7 +152,7 @@ To run the demo locally, run the following commands from the root folder after p
 `npm run setup` and `npm run demo.ios`
 
 <p align="center">
-    <img height="750" src="https://raw.githubusercontent.com/bradleygore/nativescript-textinputlayout/master/demoIOS.gif" alt="NativeScript Text Input Layout demo"/>
+    <img height="750" src="https://raw.githubusercontent.com/bradleygore/nativescript-textinputlayout/master/iosDemo.gif" alt="NativeScript Text Input Layout demo"/>
 </p>
 
 ------------------
