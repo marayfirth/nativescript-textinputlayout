@@ -1,14 +1,20 @@
 # nativescript-textinputlayout
-### Android Material Design TextInputLayout for NativeScript
+## Android Material Design TextInputLayout for NativeScript
 
-##### [Android TextInputLayout Documentation](http://developer.android.com/reference/android/support/design/widget/TextInputLayout.html)
+#### [Android TextInputLayout Documentation](http://developer.android.com/reference/android/support/design/widget/TextInputLayout.html)
+
+#### [iOS SkyFloatingLabelTextField Documentation](https://github.com/Skyscanner/SkyFloatingLabelTextField)
 
 ----------
 
-### Usage
+## Usage
 
 Install the plugin by running this command in your project root:
 `tns plugin add nativescript-textinputlayout`
+
+The android and iOS implementations, while very similar in effect, have several differences. The below sections break up usage by platform.
+
+### Android
 
 ```xml
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:TIL="nativescript-textinputlayout">
@@ -74,7 +80,84 @@ To run the demo locally, run the following commands from the root folder after p
 
 ------------------
 
-### Attributions
+## iOS
+
+The pod in use for the iOS functionality actually allows for a bit nicer markup as it extends UITextField, which NativeScript already has a wrapper for. So, instead of a `TextInpuLayout` that wraps a `TextField`, we just need a single element and we get to take advantage of all the normal `TextField` bindings that comes from NativeScript! Note, however, that there are two different kinds of inputs:
+
+* `TextInputLayout` - standard input with floating label, error message capability, etc..
+* `TextInputLayoutWithIcon` - same as above, with addition of an icon and icon-related properties..
+
+```xml
+
+<TIL:TextInputLayout
+    hint="{{ hint }}"
+    error="{{ error }}"
+    text="{{ demoText }}"
+    title="{{ title }}"
+    color="{{ error ? '#aa0000' : '#d745ff' }}"
+    tintColor="#d745ff"
+    lineColor="#d745ff"
+    selectedTitleColor="#ff45ca"
+    selectedLineColor="#7a45ff"
+    lineHeight="1.25"
+    selectedLineHeight="3.5" />
+
+<TIL:TextInputLayoutWithIcon
+    hint="Is there an error?"
+    text="{{ error }}"
+    iconFont="{{ iconFont }}"
+    iconText="{{ iconText }}"
+    iconColor="#48c8ff"
+    selectedIconColor="#aa0000"
+    iconMarginLeft="2"
+    iconMarginBottom="2"
+    iconRotationDegrees="45"
+    title="Error Text"
+    tintColor="#48c8ff"
+    lineColor="#48c8ff"
+    selectedTitleColor="#6348ff"
+    selectedLineColor="#48ff7f"
+    lineHeight="0.5"
+    selectedLineHeight="1" />
+
+```
+
+#### Attributes
+
+*Note*: Any properties relating to **color** must be a value that is valid to pass to NativeScript's [Color constructor](https://github.com/NativeScript/NativeScript/tree/v2.5.2/tns-core-modules/color)
+
+*Note*: Any properties relating to **icon** apply only to the `TextInputLayoutWithIcon` widget and will not do anything on the regular `TextInputLayout` widget.
+
+Name | Description | Value Type | Default
+-----|-------------|------------|---------
+hint | Text that shows up in the text field's placeholder area | String | ""
+error | Text that will display as error message and make the widget look invalid | String | ""
+title | Text that will display in the 'floating label' when there is a value in the field (`hint` value used if nothing supplied) | String | ""
+tintColor | Color of the blinking cursor when field focused | String | ""
+lineColor | Color of the line underneath the field | String | ""
+selectedTitleColor | Color of the floating label when field is selected | String | ""
+selectedLineColor | Color of the line underneath the field when field is selected | String | ""
+lineHeight | Thickness of the line underneath the field (set to 0 for no line at all) | Number | 1
+iconFont | UIFont to use for the icon. Easiest way is to use the `ui/styling/font` module and create the font: <br> `Font.default.withFontFamily("FontAwesome").withFontSize(16).getUIFont(null))` | UIFont | null
+iconText | Unicode value to pass to the icon. *NOTE*: I was only able to get this to work by binding it to a view model rather than passing the value in directly: <br> i.e. `viewModel.set('iconText', '\uf06a')` vs `iconText="&#xf06a;"` | String | ""
+iconColor | Color of the icon | String | ""
+selectedIconColor | Color of the icon when field focused | String | ""
+iconMarginLeft | Margin on the left of the icon | Number | *pod's default*
+iconMarginBottom | Margin on the bottom of the icon | Number | *pod's default*
+iconRotationDegrees | Amount to rotate the icon | Number | *pod's default*
+
+#### Demo
+
+To run the demo locally, run the following commands from the root folder after pulling down this repo:
+`npm run setup` and `npm run demo.ios`
+
+<p align="center">
+    <img height="750" src="https://raw.githubusercontent.com/bradleygore/nativescript-textinputlayout/master/demoIOS.gif" alt="NativeScript Text Input Layout demo"/>
+</p>
+
+------------------
+
+## Attributions
 
 [Nathanael Anderson](https://github.com/NathanaelA) - He helped me with what (LayoutBase, ContentView, View, ...) to subclass off of and helped me understand more of the nuances of each.
 
