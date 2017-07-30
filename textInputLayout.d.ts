@@ -4,44 +4,46 @@
  *      Implements functionality outline in android's TextInputLayout component
  */
 
+
 declare module 'textInputLayout' {
-    import View = require("ui/core/view");
-    import {Property} from "ui/core/dependency-observable";
+    import { Color } from "tns-core-modules/color";
+    import View = require("tns-core-modules/ui/core/view");
+    import {Property} from "tns-core-modules/ui/core/dependency-observable";
 
-    export class TextInputLayout extends View.View implements View.AddChildFromBuilder {
-        // common
-        public static errorProperty: Property;
-        public static hintProperty: Property;
-        
-        // android-only
-        public static counterEnabledProperty: Property;
-        public static errorEnabledProperty: Property;
-        public static hintAnimationEnabledProperty: Property;
-        public static hintTextAppearanceProperty: Property;
-
-        // ios-only
-        public static titleProperty: Property;
-        public static selectedTitleColorProperty: Property;
-        public static tintColorProperty: Property;
-        // public static textColorProperty: Property;
-        public static lineColorProperty: Property;
-        public static selectedLineColorProperty: Property;
-        public static lineHeightProperty: Property;
-        public static selectedLineHeightProperty: Property;
-        public static errorColorProperty: Property;
-        public static iconColorProperty: Property;
-        public static selectedIconColorProperty: Property;
-        public static iconFontProperty: Property;
-        public static iconTextProperty: Property;
-        public static iconMarginBottomProperty: Property;
-        public static iconMarginLeftProperty: Property;
-        public static iconRotationDegreesProperty: Property;
-
-        /**
+    export class TextInputLayout extends View.View {
+         /**
          * Native [android TextInputLayout](http://developer.android.com/reference/android/support/design/widget/TextInputLayout.html)
          */
-        android ?: any;
+        android: any;
 
-        ios ?: any;
+        ios: any;
+
+        /**PROPS**/
+        public hint: string;
+        public error: string;
+
+        //ANDROID ONLY
+        public hintAnimationEnabled ?: boolean;
+        public hintTextAppearance ?: string;
+        public counterEnabled ?: boolean;
+        public errorEnabled ?: boolean;
+
+        //IOS Only
+        public title ?: string;
+        public tintColor ?: Color;
+        public lineColor ?: Color;
+        public selectedTintColor ?: Color;
+        public selectedLineColor ?: Color;
+        public selectedTitleColor ?: Color;
+        public lineHeight ?: number;
+        public selectedLineHeight ?: number;
+        public errorColor ?: Color;
+        public iconColor ?: Color;
+        public selectedIconColor ?: Color;
+        public iconFont ?: string;
+        public iconText ?: string;
+        public iconMarginBottom ?: number;
+        public iconMarginLeft ?: number;
+        public iconRotationDegrees ?: number;
     }
 }

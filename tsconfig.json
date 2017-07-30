@@ -1,28 +1,26 @@
 {
     "compilerOptions": {
-        "target": "es5",
         "module": "commonjs",
+        "target": "es5",
+        "noImplicitAny": false,
         "removeComments": true,
-        "experimentalDecorators": true,
+        "preserveConstEnums": true,
+        "sourceMap": false,
+        "declaration": false,
+        "noLib": false,
         "noEmitHelpers": true,
-        "declaration": true,
-        "noLib": true,
-        "skipLibCheck": true
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "*": [
+                "./node_modules/tns-core-modules/*",
+                "./node_modules/*"
+            ]
+        }
     },
-    "files": [
-      "node_modules/typescript/lib/lib.core.d.ts",
-      "manual_typings/base.d.ts",
-      "node_modules/tns-core-modules/tns-core-modules.d.ts",
-      "node_modules/tns-platform-declarations/android/android17.d.ts",
-      "node_modules/tns-platform-declarations/ios/ios.d.ts",
-      "node_modules/tns-platform-declarations/android/org.nativescript.widgets.d.ts",
-      "textInputLayout.d.ts",
-      "textInputLayout.common.ts",
-      "textInputLayout.android.ts",
-      "textInputLayout.ios.ts"
-    ],
-    "compileOnSave": false,
     "exclude": [
-        "./demo"
+        "demo",
+        "node_modules",
+        "platforms"
     ]
 }

@@ -1,27 +1,28 @@
 import { TextInputLayout as CommonTextInputLayout } from './textInputLayout.common';
-import { TextField } from 'ui/text-field';
+import { TextField } from 'tns-core-modules/ui/text-field';
+import { Color } from 'tns-core-modules/color';
 export declare class TextInputLayout extends TextField implements CommonTextInputLayout {
     _ios: any;
     _childLoaded: boolean;
+    error: string;
+    title: string;
+    tintColor: Color;
+    lineColor: Color;
+    selectedTintColor: Color;
+    selectedLineColor: Color;
+    selectedTitleColor: Color;
+    lineHeight: number;
+    selectedLineHeight: number;
+    errorColor: Color;
+    iconColor: Color;
+    selectedIconColor: Color;
+    iconFont: string;
+    iconText: string;
+    iconMarginBottom: number;
+    iconMarginLeft: number;
+    iconRotationDegrees: number;
     readonly ios: any;
     readonly _nativeView: any;
-    hint: any;
-    error: any;
-    title: any;
-    selectedTitleColor: any;
-    tintColor: any;
-    lineColor: any;
-    selectedLineColor: any;
-    lineHeight: any;
-    selectedLineHeight: any;
-    errorColor: any;
-    iconText: any;
-    iconFont: any;
-    iconColor: any;
-    selectedIconColor: any;
-    iconMarginBottom: any;
-    iconMarginLeft: any;
-    iconRotationDegrees: any;
     constructor();
 }
 export declare class TextInputLayoutWithIcon extends TextInputLayout {

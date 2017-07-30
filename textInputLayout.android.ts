@@ -1,87 +1,18 @@
 declare var android: any;
 
-import {PropertyChangeData} from "ui/core/dependency-observable";
-import {PropertyMetadata} from "ui/core/proxy";
-import {TextInputLayout as CommonTextInputLayout} from './textInputLayout.common';
-import {View} from "ui/core/view";
-import {TextView} from 'ui/text-view';
-import {TextField} from 'ui/text-field';
-
-
-/* callbacks to update native widget when exposed properties change */
-
-// hintProperty
-function onHintPropertyChanged(pcData: PropertyChangeData) {
-    let til = <TextInputLayout>pcData.object;
-    if (til.android) {
-        til.android.setHint(pcData.newValue);
-    }
-}
-(<PropertyMetadata>CommonTextInputLayout.hintProperty.metadata).onSetNativeValue = onHintPropertyChanged;
-
-// hintAnimationEnabledProperty
-function onHintAnimationEnabledPropertyChanged(pcData: PropertyChangeData) {
-    let til = <TextInputLayout>pcData.object,
-        enabled: boolean = !!pcData.newValue;
-    if (til.android) {
-        til.android.setHintAnimationEnabled(enabled);
-    }
-}
-(<PropertyMetadata>CommonTextInputLayout.hintAnimationEnabledProperty.metadata).onSetNativeValue = onHintAnimationEnabledPropertyChanged;
-
-// hintAppearanceProperty
-function onHintAppearancePropertyChanged(pcData: PropertyChangeData) {
-    let til = <TextInputLayout>pcData.object;
-
-    if(til.hintTextAppearance) {
-        let resId = getStyleResourceId(til._context, til.hintTextAppearance);
-        if (resId) {
-            til.android.setHintTextAppearance(resId);
-        }
-    }
-}
-(<PropertyMetadata>CommonTextInputLayout.hintTextAppearanceProperty.metadata).onSetNativeValue = onHintAppearancePropertyChanged;
-
-// errorEnabledProperty
-function onErrorEnabledPropertyChanged(pcData: PropertyChangeData) {
-    let til = <TextInputLayout>pcData.object,
-        enabled: boolean = !!pcData.newValue;
-    if (til.android) {
-        if (!enabled && (til.error || '').length > 0) {
-            til.error = '';
-        }
-
-        til.android.setErrorEnabled(enabled);
-    }
-}
-(<PropertyMetadata>CommonTextInputLayout.errorEnabledProperty.metadata).onSetNativeValue = onErrorEnabledPropertyChanged;
-
-// errorProperty
-// NOTE: Android natively sets errorEnabled to true if this is not null
-function onErrorPropertyChanged(pcData: PropertyChangeData) {
-    let til = <TextInputLayout>pcData.object,
-        error: string = pcData.newValue || '',
-        enabled: boolean = til.errorEnabled;
-    if (til.android && til.childLoaded) {
-        til.android.setError(error);
-        if (!enabled && error.length > 0) {
-            til.errorEnabled = true;
-        }
-    }
-}
-(<PropertyMetadata>CommonTextInputLayout.errorProperty.metadata).onSetNativeValue = onErrorPropertyChanged;
-
-// counterEnabledProperty
-function onCounterEnabledPropertyChanged(pcData: PropertyChangeData) {
-    let til = <TextInputLayout>pcData.object,
-        enabled: boolean = !!pcData.newValue;
-    if (til.android) {
-        til.android.setCounterEnabled(enabled);
-    }
-}
-
-(<PropertyMetadata>CommonTextInputLayout.counterEnabledProperty.metadata).onSetNativeValue = onCounterEnabledPropertyChanged;
-
+import {PropertyChangeData} from "tns-core-modules/ui/core/dependency-observable";
+import {
+    TextInputLayout as CommonTextInputLayout,
+    hintProperty,
+    hintAnimationEnabledProperty,
+    hintTextAppearanceProperty,
+    errorEnabledProperty,
+    errorProperty,
+    counterEnabledProperty
+} from './textInputLayout.common';
+import {View} from "tns-core-modules/ui/core/view";
+import {TextView} from 'tns-core-modules/ui/text-view';
+import {TextField} from 'tns-core-modules/ui/text-field';
 
 function getStyleResourceId(context: any, name: string) {
     return context.getResources().getIdentifier(name, 'style', context.getPackageName());
@@ -90,6 +21,11 @@ function getStyleResourceId(context: any, name: string) {
 export class TextInputLayout extends CommonTextInputLayout {
     _android: any;
     _childLoaded: boolean;
+
+    public hintAnimationEnabled ?: boolean;
+    public hintTextAppearance ?: string;
+    public counterEnabled ?: boolean;
+    public errorEnabled ?: boolean;
 
     get childLoaded() { return this._childLoaded; }
     set childLoaded(val: boolean) { this._childLoaded = val; }
@@ -123,18 +59,48 @@ export class TextInputLayout extends CommonTextInputLayout {
         return 0;
     }
 
-    get counterEnabled() { return this._getValue(CommonTextInputLayout.counterEnabledProperty); }
-    set counterEnabled(value) { this._setValue(CommonTextInputLayout.counterEnabledProperty, value); }
+    [hintProperty.setNative](value: string) {
+        if (this.android) {
+            this.android.setHint(value);
+        }
+    }
 
-    get errorEnabled() { return this._getValue(CommonTextInputLayout.errorEnabledProperty); }
-    set errorEnabled(value) { this._setValue(CommonTextInputLayout.errorEnabledProperty, value); }
+    [hintAnimationEnabledProperty.setNative](value: boolean) {
+        if (this.android) {
+            this.android.setHintAnimationEnabled(value);
+        }
+    }
 
+    [hintTextAppearanceProperty.setNative](value: string) {
+        if (value && this.android) {
+            this.android.setHintTextAppearance(getStyleResourceId(this._context, value));
+        }
+    }
 
-    get hintAnimationEnabled() { return this._getValue(CommonTextInputLayout.hintAnimationEnabledProperty); }
-    set hintAnimationEnabled(value) { this._setValue(CommonTextInputLayout.hintAnimationEnabledProperty, value); }
+    [errorEnabledProperty.setNative](value: boolean) {
+        if (this.android) {
+            if (!value && (this.error ||'').length > 0) {
+                this.error = '';
+            }
+            this.android.setErrorEnabled(value);
+        }
+    }
 
-    get hintTextAppearance() { return this._getValue(CommonTextInputLayout.hintTextAppearanceProperty); }
-    set hintTextAppearance(value) { this._setValue(CommonTextInputLayout.hintTextAppearanceProperty, value); }
+    [errorProperty.setNative](value: string) {
+        // NOTE: Android natively sets errorEnabled to true if this is not null
+        if (this.android && this.childLoaded) {
+            this.android.setError(value || '');
+            if ((value||'').length > 0) {
+                this.errorEnabled = true;
+            }
+        }
+    }
+
+    [counterEnabledProperty.setNative](value: boolean) {
+        if (this.android) {
+            this.android.setCounterEnabled(value);
+        }
+    }
 
     constructor() {
         super();

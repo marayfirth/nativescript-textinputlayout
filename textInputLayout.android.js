@@ -1,60 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var textInputLayout_common_1 = require("./textInputLayout.common");
-var view_1 = require("ui/core/view");
-var text_view_1 = require("ui/text-view");
-var text_field_1 = require("ui/text-field");
-function onHintPropertyChanged(pcData) {
-    var til = pcData.object;
-    if (til.android) {
-        til.android.setHint(pcData.newValue);
-    }
-}
-textInputLayout_common_1.TextInputLayout.hintProperty.metadata.onSetNativeValue = onHintPropertyChanged;
-function onHintAnimationEnabledPropertyChanged(pcData) {
-    var til = pcData.object, enabled = !!pcData.newValue;
-    if (til.android) {
-        til.android.setHintAnimationEnabled(enabled);
-    }
-}
-textInputLayout_common_1.TextInputLayout.hintAnimationEnabledProperty.metadata.onSetNativeValue = onHintAnimationEnabledPropertyChanged;
-function onHintAppearancePropertyChanged(pcData) {
-    var til = pcData.object;
-    if (til.hintTextAppearance) {
-        var resId = getStyleResourceId(til._context, til.hintTextAppearance);
-        if (resId) {
-            til.android.setHintTextAppearance(resId);
-        }
-    }
-}
-textInputLayout_common_1.TextInputLayout.hintTextAppearanceProperty.metadata.onSetNativeValue = onHintAppearancePropertyChanged;
-function onErrorEnabledPropertyChanged(pcData) {
-    var til = pcData.object, enabled = !!pcData.newValue;
-    if (til.android) {
-        if (!enabled && (til.error || '').length > 0) {
-            til.error = '';
-        }
-        til.android.setErrorEnabled(enabled);
-    }
-}
-textInputLayout_common_1.TextInputLayout.errorEnabledProperty.metadata.onSetNativeValue = onErrorEnabledPropertyChanged;
-function onErrorPropertyChanged(pcData) {
-    var til = pcData.object, error = pcData.newValue || '', enabled = til.errorEnabled;
-    if (til.android && til.childLoaded) {
-        til.android.setError(error);
-        if (!enabled && error.length > 0) {
-            til.errorEnabled = true;
-        }
-    }
-}
-textInputLayout_common_1.TextInputLayout.errorProperty.metadata.onSetNativeValue = onErrorPropertyChanged;
-function onCounterEnabledPropertyChanged(pcData) {
-    var til = pcData.object, enabled = !!pcData.newValue;
-    if (til.android) {
-        til.android.setCounterEnabled(enabled);
-    }
-}
-textInputLayout_common_1.TextInputLayout.counterEnabledProperty.metadata.onSetNativeValue = onCounterEnabledPropertyChanged;
+var view_1 = require("tns-core-modules/ui/core/view");
+var text_view_1 = require("tns-core-modules/ui/text-view");
+var text_field_1 = require("tns-core-modules/ui/text-field");
 function getStyleResourceId(context, name) {
     return context.getResources().getIdentifier(name, 'style', context.getPackageName());
 }
@@ -105,30 +54,42 @@ var TextInputLayout = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TextInputLayout.prototype, "counterEnabled", {
-        get: function () { return this._getValue(textInputLayout_common_1.TextInputLayout.counterEnabledProperty); },
-        set: function (value) { this._setValue(textInputLayout_common_1.TextInputLayout.counterEnabledProperty, value); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TextInputLayout.prototype, "errorEnabled", {
-        get: function () { return this._getValue(textInputLayout_common_1.TextInputLayout.errorEnabledProperty); },
-        set: function (value) { this._setValue(textInputLayout_common_1.TextInputLayout.errorEnabledProperty, value); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TextInputLayout.prototype, "hintAnimationEnabled", {
-        get: function () { return this._getValue(textInputLayout_common_1.TextInputLayout.hintAnimationEnabledProperty); },
-        set: function (value) { this._setValue(textInputLayout_common_1.TextInputLayout.hintAnimationEnabledProperty, value); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TextInputLayout.prototype, "hintTextAppearance", {
-        get: function () { return this._getValue(textInputLayout_common_1.TextInputLayout.hintTextAppearanceProperty); },
-        set: function (value) { this._setValue(textInputLayout_common_1.TextInputLayout.hintTextAppearanceProperty, value); },
-        enumerable: true,
-        configurable: true
-    });
+    TextInputLayout.prototype[textInputLayout_common_1.hintProperty.setNative] = function (value) {
+        if (this.android) {
+            this.android.setHint(value);
+        }
+    };
+    TextInputLayout.prototype[textInputLayout_common_1.hintAnimationEnabledProperty.setNative] = function (value) {
+        if (this.android) {
+            this.android.setHintAnimationEnabled(value);
+        }
+    };
+    TextInputLayout.prototype[textInputLayout_common_1.hintTextAppearanceProperty.setNative] = function (value) {
+        if (value && this.android) {
+            this.android.setHintTextAppearance(getStyleResourceId(this._context, value));
+        }
+    };
+    TextInputLayout.prototype[textInputLayout_common_1.errorEnabledProperty.setNative] = function (value) {
+        if (this.android) {
+            if (!value && (this.error || '').length > 0) {
+                this.error = '';
+            }
+            this.android.setErrorEnabled(value);
+        }
+    };
+    TextInputLayout.prototype[textInputLayout_common_1.errorProperty.setNative] = function (value) {
+        if (this.android && this.childLoaded) {
+            this.android.setError(value || '');
+            if ((value || '').length > 0) {
+                this.errorEnabled = true;
+            }
+        }
+    };
+    TextInputLayout.prototype[textInputLayout_common_1.counterEnabledProperty.setNative] = function (value) {
+        if (this.android) {
+            this.android.setCounterEnabled(value);
+        }
+    };
     TextInputLayout.prototype._createUI = function () {
         this._android = new android.support.design.widget.TextInputLayout(this._context);
     };

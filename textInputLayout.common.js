@@ -1,68 +1,128 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var view_1 = require("ui/core/view");
-var dependency_observable_1 = require("ui/core/dependency-observable");
-var proxy_1 = require("ui/core/proxy");
+var view_1 = require("tns-core-modules/ui/core/view");
+var color_1 = require("tns-core-modules/color");
 var TIL = 'TextInputLayout';
-var errorProperty = new dependency_observable_1.Property("error", TIL, new proxy_1.PropertyMetadata('', dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
-var hintProperty = new dependency_observable_1.Property("hint", TIL, new proxy_1.PropertyMetadata('', dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
-var hintAnimationEnabledProperty = new dependency_observable_1.Property("hintAnimationEnabled", TIL, new proxy_1.PropertyMetadata(true, dependency_observable_1.PropertyMetadataSettings.None));
-var hintTextAppearanceProperty = new dependency_observable_1.Property("hintTextAppearance", TIL, new proxy_1.PropertyMetadata(undefined));
-var counterEnabledProperty = new dependency_observable_1.Property("counterEnabled", TIL, new proxy_1.PropertyMetadata(false, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
-var errorEnabledProperty = new dependency_observable_1.Property("errorEnabled", TIL, new proxy_1.PropertyMetadata(true, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
-var titleProperty = new dependency_observable_1.Property("title", TIL, new proxy_1.PropertyMetadata(undefined, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
-var tintColorProperty = new dependency_observable_1.Property("tintColor", TIL, new proxy_1.PropertyMetadata(undefined, dependency_observable_1.PropertyMetadataSettings.AffectsStyle));
-var lineColorProperty = new dependency_observable_1.Property("lineColor", TIL, new proxy_1.PropertyMetadata(undefined, dependency_observable_1.PropertyMetadataSettings.AffectsStyle));
-var selectedTitleColorProperty = new dependency_observable_1.Property("selectedTitleColor", TIL, new proxy_1.PropertyMetadata(undefined, dependency_observable_1.PropertyMetadataSettings.AffectsStyle));
-var selectedLineColorProperty = new dependency_observable_1.Property("selectedLineColor", TIL, new proxy_1.PropertyMetadata(undefined, dependency_observable_1.PropertyMetadataSettings.AffectsStyle));
-var lineHeightProperty = new dependency_observable_1.Property("lineHeight", TIL, new proxy_1.PropertyMetadata(undefined, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
-var selectedLineHeightProperty = new dependency_observable_1.Property("selectedLineHeight", TIL, new proxy_1.PropertyMetadata(undefined, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
-var errorColorProperty = new dependency_observable_1.Property("errorColor", TIL, new proxy_1.PropertyMetadata(undefined, dependency_observable_1.PropertyMetadataSettings.AffectsStyle));
-var iconColorProperty = new dependency_observable_1.Property("iconColor", TIL, new proxy_1.PropertyMetadata(undefined, dependency_observable_1.PropertyMetadataSettings.AffectsStyle));
-var selectedIconColorProperty = new dependency_observable_1.Property("selectedIconColor", TIL, new proxy_1.PropertyMetadata(undefined, dependency_observable_1.PropertyMetadataSettings.AffectsStyle));
-var iconFontProperty = new dependency_observable_1.Property("iconFont", TIL, new proxy_1.PropertyMetadata(undefined, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
-var iconTextProperty = new dependency_observable_1.Property("iconText", TIL, new proxy_1.PropertyMetadata(undefined, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
-var iconMarginBottomProperty = new dependency_observable_1.Property("iconMarginBottom", TIL, new proxy_1.PropertyMetadata(undefined, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
-var iconMarginLeftProperty = new dependency_observable_1.Property("iconMarginLeft", TIL, new proxy_1.PropertyMetadata(undefined, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
-var iconRotationDegreesProperty = new dependency_observable_1.Property("iconRotationDegrees", TIL, new proxy_1.PropertyMetadata(undefined, dependency_observable_1.PropertyMetadataSettings.AffectsLayout));
 var TextInputLayout = (function (_super) {
     __extends(TextInputLayout, _super);
     function TextInputLayout() {
         return _super.call(this) || this;
     }
-    Object.defineProperty(TextInputLayout.prototype, "hint", {
-        get: function () { return this._getValue(hintProperty); },
-        set: function (value) { this._setValue(hintProperty, value + ''); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TextInputLayout.prototype, "error", {
-        get: function () { return this._getValue(errorProperty); },
-        set: function (val) { this._setValue(errorProperty, val + ''); },
-        enumerable: true,
-        configurable: true
-    });
     return TextInputLayout;
 }(view_1.View));
-TextInputLayout.errorProperty = errorProperty;
-TextInputLayout.hintProperty = hintProperty;
-TextInputLayout.counterEnabledProperty = counterEnabledProperty;
-TextInputLayout.hintAnimationEnabledProperty = hintAnimationEnabledProperty;
-TextInputLayout.hintTextAppearanceProperty = hintTextAppearanceProperty;
-TextInputLayout.errorEnabledProperty = errorEnabledProperty;
-TextInputLayout.titleProperty = titleProperty;
-TextInputLayout.selectedTitleColorProperty = selectedTitleColorProperty;
-TextInputLayout.tintColorProperty = tintColorProperty;
-TextInputLayout.lineColorProperty = lineColorProperty;
-TextInputLayout.selectedLineColorProperty = selectedLineColorProperty;
-TextInputLayout.lineHeightProperty = lineHeightProperty;
-TextInputLayout.selectedLineHeightProperty = selectedLineHeightProperty;
-TextInputLayout.errorColorProperty = errorColorProperty;
-TextInputLayout.iconColorProperty = iconColorProperty;
-TextInputLayout.selectedIconColorProperty = selectedIconColorProperty;
-TextInputLayout.iconFontProperty = iconFontProperty;
-TextInputLayout.iconTextProperty = iconTextProperty;
-TextInputLayout.iconMarginBottomProperty = iconMarginBottomProperty;
-TextInputLayout.iconMarginLeftProperty = iconMarginLeftProperty;
-TextInputLayout.iconRotationDegreesProperty = iconRotationDegreesProperty;
 exports.TextInputLayout = TextInputLayout;
+exports.errorProperty = new view_1.Property({
+    name: "error",
+    affectsLayout: true
+});
+exports.errorProperty.register(TextInputLayout);
+exports.hintProperty = new view_1.Property({
+    name: "hint",
+    affectsLayout: true
+});
+exports.hintProperty.register(TextInputLayout);
+exports.hintAnimationEnabledProperty = new view_1.Property({
+    name: "hintAnimationEnabled"
+});
+exports.hintAnimationEnabledProperty.register(TextInputLayout);
+exports.hintTextAppearanceProperty = new view_1.Property({
+    name: "hintTextAppearance"
+});
+exports.hintTextAppearanceProperty.register(TextInputLayout);
+exports.counterEnabledProperty = new view_1.Property({
+    name: "counterEnabled",
+    affectsLayout: true
+});
+exports.counterEnabledProperty.register(TextInputLayout);
+exports.errorEnabledProperty = new view_1.Property({
+    name: "errorEnabled",
+    affectsLayout: true
+});
+exports.errorEnabledProperty.register(TextInputLayout);
+exports.titleProperty = new view_1.Property({
+    name: "title",
+    affectsLayout: true
+});
+exports.titleProperty.register(TextInputLayout);
+exports.tintColorProperty = new view_1.Property({
+    name: "tintColor",
+    equalityComparer: color_1.Color.equals,
+    valueConverter: function (v) { return new color_1.Color(v); }
+});
+exports.tintColorProperty.register(TextInputLayout);
+exports.lineColorProperty = new view_1.Property({
+    name: "lineColor",
+    equalityComparer: color_1.Color.equals,
+    valueConverter: function (v) { return new color_1.Color(v); }
+});
+exports.lineColorProperty.register(TextInputLayout);
+exports.selectedTitleColorProperty = new view_1.Property({
+    name: "selectedTitleColor",
+    equalityComparer: color_1.Color.equals,
+    valueConverter: function (v) { return new color_1.Color(v); }
+});
+exports.selectedTitleColorProperty.register(TextInputLayout);
+exports.selectedLineColorProperty = new view_1.Property({
+    name: "selectedLineColor",
+    equalityComparer: color_1.Color.equals,
+    valueConverter: function (v) { return new color_1.Color(v); }
+});
+exports.selectedLineColorProperty.register(TextInputLayout);
+exports.lineHeightProperty = new view_1.Property({
+    name: "lineHeight",
+    affectsLayout: true,
+    valueConverter: function (v) { return Number(v); }
+});
+exports.lineHeightProperty.register(TextInputLayout);
+exports.selectedLineHeightProperty = new view_1.Property({
+    name: "selectedLineHeight",
+    affectsLayout: true,
+    valueConverter: function (v) { return Number(v); }
+});
+exports.selectedLineHeightProperty.register(TextInputLayout);
+exports.errorColorProperty = new view_1.Property({
+    name: "errorColor",
+    equalityComparer: color_1.Color.equals,
+    valueConverter: function (v) { return new color_1.Color(v); }
+});
+exports.errorColorProperty.register(TextInputLayout);
+exports.iconColorProperty = new view_1.Property({
+    name: "iconColor",
+    equalityComparer: color_1.Color.equals,
+    valueConverter: function (v) { return new color_1.Color(v); }
+});
+exports.iconColorProperty.register(TextInputLayout);
+exports.selectedIconColorProperty = new view_1.Property({
+    name: "selectedIconColor",
+    equalityComparer: color_1.Color.equals,
+    valueConverter: function (v) { return new color_1.Color(v); }
+});
+exports.selectedIconColorProperty.register(TextInputLayout);
+exports.iconFontProperty = new view_1.Property({
+    name: "iconFont",
+    affectsLayout: true
+});
+exports.iconFontProperty.register(TextInputLayout);
+exports.iconTextProperty = new view_1.Property({
+    name: "iconText",
+    affectsLayout: true
+});
+exports.iconTextProperty.register(TextInputLayout);
+exports.iconMarginBottomProperty = new view_1.Property({
+    name: "iconMarginBottom",
+    affectsLayout: true,
+    valueConverter: function (v) { return Number(v); }
+});
+exports.iconMarginBottomProperty.register(TextInputLayout);
+exports.iconMarginLeftProperty = new view_1.Property({
+    name: "iconMarginLeft",
+    affectsLayout: true,
+    valueConverter: function (v) { return Number(v); }
+});
+exports.iconMarginLeftProperty.register(TextInputLayout);
+exports.iconRotationDegreesProperty = new view_1.Property({
+    name: "iconRotationDegrees",
+    affectsLayout: true,
+    valueConverter: function (v) { return Number(v); }
+});
+exports.iconRotationDegreesProperty.register(TextInputLayout);

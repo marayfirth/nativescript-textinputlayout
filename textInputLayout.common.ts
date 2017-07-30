@@ -1,169 +1,165 @@
 import definition = require('textInputLayout');
-import {View} from "ui/core/view";
-import {Property, PropertyMetadataSettings} from "ui/core/dependency-observable";
-import {PropertyMetadata} from "ui/core/proxy";
-import {TextView} from 'ui/text-view';
-import {TextField} from 'ui/text-field';
+import {View, Property} from "tns-core-modules/ui/core/view";
+import {PropertyMetadataSettings} from "tns-core-modules/ui/core/dependency-observable";
+import {TextView} from 'tns-core-modules/ui/text-view';
+import {TextField} from 'tns-core-modules/ui/text-field';
+import { Color } from "tns-core-modules/color";
 
 const TIL = 'TextInputLayout';
 
-const errorProperty: Property = new Property(
-    "error",
-    TIL,
-    new PropertyMetadata('', PropertyMetadataSettings.AffectsLayout)
-);
-
-// NOTE: This is 'placeholder' for ios
-const hintProperty: Property = new Property(
-    "hint",
-    TIL,
-    new PropertyMetadata('', PropertyMetadataSettings.AffectsLayout)
-);
-
-
-/*** android-only properties ***/
-const hintAnimationEnabledProperty: Property = new Property(
-    "hintAnimationEnabled",
-    TIL,
-    new PropertyMetadata(true, PropertyMetadataSettings.None)
-);
-const hintTextAppearanceProperty: Property = new Property(
-    "hintTextAppearance",
-    TIL,
-    new PropertyMetadata(undefined)
-);
-const counterEnabledProperty: Property = new Property(
-    "counterEnabled",
-    TIL,
-    new PropertyMetadata(false, PropertyMetadataSettings.AffectsLayout)
-);
-const errorEnabledProperty: Property = new Property(
-    "errorEnabled",
-    TIL,
-    new PropertyMetadata(true, PropertyMetadataSettings.AffectsLayout)
-);
-
-/*** ios-only properties ***/
-
-// note: this is the floating label value 
-const titleProperty: Property = new Property(
-    "title",
-    TIL,
-    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsLayout)
-);
-const tintColorProperty: Property = new Property(
-    "tintColor",
-    TIL,
-    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsStyle)
-);
-
-const lineColorProperty: Property = new Property(
-    "lineColor",
-    TIL,
-    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsStyle)
-);
-const selectedTitleColorProperty: Property = new Property(
-    "selectedTitleColor",
-    TIL,
-    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsStyle)
-);
-const selectedLineColorProperty: Property = new Property(
-    "selectedLineColor",
-    TIL,
-    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsStyle)
-);
-const lineHeightProperty: Property = new Property(
-    "lineHeight",
-    TIL,
-    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsLayout)
-);
-const selectedLineHeightProperty: Property = new Property(
-    "selectedLineHeight",
-    TIL,
-    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsLayout)
-);
-const errorColorProperty: Property = new Property(
-    "errorColor",
-    TIL,
-    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsStyle)
-);
-const iconColorProperty: Property = new Property(
-    "iconColor",
-    TIL,
-    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsStyle)
-);
-const selectedIconColorProperty: Property = new Property(
-    "selectedIconColor",
-    TIL,
-    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsStyle)
-);
-const iconFontProperty: Property = new Property(
-    "iconFont",
-    TIL,
-    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsLayout)
-);
-const iconTextProperty: Property = new Property(
-    "iconText",
-    TIL,
-    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsLayout)
-);
-const iconMarginBottomProperty: Property = new Property(
-    "iconMarginBottom",
-    TIL,
-    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsLayout)
-);
-const iconMarginLeftProperty: Property = new Property(
-    "iconMarginLeft",
-    TIL,
-    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsLayout)
-);
-const iconRotationDegreesProperty: Property = new Property(
-    "iconRotationDegrees",
-    TIL,
-    new PropertyMetadata(undefined, PropertyMetadataSettings.AffectsLayout)
-);
-
-
 
 export class TextInputLayout extends View implements definition.TextInputLayout {
-    // common
-    public static errorProperty: Property = errorProperty;
-    public static hintProperty: Property = hintProperty;
-    
-    //android-only
-    public static counterEnabledProperty: Property = counterEnabledProperty;
-    public static hintAnimationEnabledProperty: Property = hintAnimationEnabledProperty;
-    public static hintTextAppearanceProperty: Property = hintTextAppearanceProperty;
-    public static errorEnabledProperty: Property = errorEnabledProperty;
-
-    //ios-only
-    public static titleProperty: Property = titleProperty;
-    public static selectedTitleColorProperty: Property = selectedTitleColorProperty;
-    public static tintColorProperty: Property = tintColorProperty;
-    // public static textColorProperty: Property = textColorProperty;
-    public static lineColorProperty: Property = lineColorProperty;
-    public static selectedLineColorProperty: Property = selectedLineColorProperty;
-    public static lineHeightProperty: Property = lineHeightProperty;
-    public static selectedLineHeightProperty: Property = selectedLineHeightProperty;
-    public static errorColorProperty: Property = errorColorProperty;
-    public static iconColorProperty: Property = iconColorProperty;
-    public static selectedIconColorProperty: Property = selectedIconColorProperty;
-    public static iconFontProperty: Property = iconFontProperty;
-    public static iconTextProperty: Property = iconTextProperty;
-    public static iconMarginBottomProperty: Property = iconMarginBottomProperty;
-    public static iconMarginLeftProperty: Property = iconMarginLeftProperty;
-    public static iconRotationDegreesProperty: Property = iconRotationDegreesProperty;
 
     constructor() {
         super();
     }
 
     // common
-    get hint() { return this._getValue(hintProperty); }
-    set hint(value) { this._setValue(hintProperty, value + ''); }
-
-    get error() { return this._getValue(errorProperty) }
-    set error(val) { this._setValue(errorProperty, val + ''); }
+    public hint: string;
+    public error: string;
 
     /* GETTERS/SETTERS for other property accessors implemented individually in ios/android components as they're so different */
 }
+
+/****** PROPERTIES ******/
+
+export const errorProperty = new Property<TextInputLayout, string>({
+    name: "error",
+    affectsLayout: true
+});
+errorProperty.register(TextInputLayout);
+
+// NOTE: This is 'placeholder' for ios
+export const hintProperty = new Property<TextInputLayout, string>({
+    name: "hint",
+    affectsLayout: true
+});
+hintProperty.register(TextInputLayout);
+
+/*** android-only properties ***/
+export const hintAnimationEnabledProperty = new Property<TextInputLayout, boolean>({
+    name: "hintAnimationEnabled"
+});
+hintAnimationEnabledProperty.register(TextInputLayout);
+
+export const hintTextAppearanceProperty = new Property<TextInputLayout, string>({
+    name: "hintTextAppearance"
+});
+hintTextAppearanceProperty.register(TextInputLayout);
+
+export const counterEnabledProperty = new Property<TextInputLayout, boolean>({
+    name: "counterEnabled",
+    affectsLayout: true
+});
+counterEnabledProperty.register(TextInputLayout);
+
+export const errorEnabledProperty = new Property<TextInputLayout, boolean>({
+    name: "errorEnabled",
+    affectsLayout: true
+});
+errorEnabledProperty.register(TextInputLayout);
+
+/*** ios-only properties ***/
+
+// note: this is the floating label value 
+export const titleProperty = new Property<TextInputLayout, string>({
+    name: "title",
+    affectsLayout: true
+});
+titleProperty.register(TextInputLayout);
+
+export const tintColorProperty = new Property<TextInputLayout, Color>({
+    name: "tintColor",
+    equalityComparer: Color.equals,
+    valueConverter: (v) => new Color(v)
+});
+tintColorProperty.register(TextInputLayout);
+
+export const lineColorProperty = new Property<TextInputLayout, Color>({
+    name: "lineColor",
+    equalityComparer: Color.equals,
+    valueConverter: (v) => new Color(v)
+});
+lineColorProperty.register(TextInputLayout);
+
+export const selectedTitleColorProperty = new Property<TextInputLayout, Color>({
+    name: "selectedTitleColor",
+    equalityComparer: Color.equals,
+    valueConverter: (v) => new Color(v)
+});
+selectedTitleColorProperty.register(TextInputLayout);
+
+export const selectedLineColorProperty = new Property<TextInputLayout, Color>({
+    name: "selectedLineColor",
+    equalityComparer: Color.equals,
+    valueConverter: (v) => new Color(v)
+});
+selectedLineColorProperty.register(TextInputLayout);
+
+export const lineHeightProperty = new Property<TextInputLayout, number>({
+    name: "lineHeight",
+    affectsLayout: true,
+    valueConverter: (v) => Number(v)
+});
+lineHeightProperty.register(TextInputLayout);
+
+export const selectedLineHeightProperty = new Property<TextInputLayout, number>({
+    name: "selectedLineHeight",
+    affectsLayout: true,
+    valueConverter: (v) => Number(v)
+});
+selectedLineHeightProperty.register(TextInputLayout);
+
+export const errorColorProperty = new Property<TextInputLayout, Color>({
+    name: "errorColor",
+    equalityComparer: Color.equals,
+    valueConverter: (v) => new Color(v)
+});
+errorColorProperty.register(TextInputLayout);
+
+export const iconColorProperty = new Property<TextInputLayout, Color>({
+    name: "iconColor",
+    equalityComparer: Color.equals,
+    valueConverter: (v) => new Color(v)
+});
+iconColorProperty.register(TextInputLayout);
+
+export const selectedIconColorProperty = new Property<TextInputLayout, Color>({
+    name: "selectedIconColor",
+    equalityComparer: Color.equals,
+    valueConverter: (v) => new Color(v)
+});
+selectedIconColorProperty.register(TextInputLayout);
+
+export const iconFontProperty = new Property<TextInputLayout, UIFont>({
+    name: "iconFont",
+    affectsLayout: true
+});
+iconFontProperty.register(TextInputLayout);
+
+export const iconTextProperty = new Property<TextInputLayout, string>({
+    name: "iconText",
+    affectsLayout: true
+});
+iconTextProperty.register(TextInputLayout);
+
+export const iconMarginBottomProperty = new Property<TextInputLayout, number>({
+    name: "iconMarginBottom",
+    affectsLayout: true,
+    valueConverter: (v) => Number(v)
+});
+iconMarginBottomProperty.register(TextInputLayout);
+
+export const iconMarginLeftProperty = new Property<TextInputLayout, number>({
+    name: "iconMarginLeft",
+    affectsLayout: true,
+    valueConverter: (v) => Number(v)
+});
+iconMarginLeftProperty.register(TextInputLayout);
+
+export const iconRotationDegreesProperty = new Property<TextInputLayout, number>({
+    name: "iconRotationDegrees",
+    affectsLayout: true,
+    valueConverter: (v) => Number(v)
+});
+iconRotationDegreesProperty.register(TextInputLayout);
