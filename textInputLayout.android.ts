@@ -15,6 +15,9 @@ import {TextView} from 'tns-core-modules/ui/text-view';
 import {TextField} from 'tns-core-modules/ui/text-field';
 
 function getStyleResourceId(context: any, name: string) {
+    if (!context || (name || '').length === 0) {
+        return null;
+    }
     return context.getResources().getIdentifier(name, 'style', context.getPackageName());
 }
 
@@ -72,8 +75,9 @@ export class TextInputLayout extends CommonTextInputLayout {
     }
 
     [hintTextAppearanceProperty.setNative](value: string) {
-        if (value && this.android) {
-            this.android.setHintTextAppearance(getStyleResourceId(this._context, value));
+        let resourceId = getStyleResourceId(this._context, value);
+        if (value && this.android && resourceId) {
+            this.android.setHintTextAppearance(resourceId);
         }
     }
 

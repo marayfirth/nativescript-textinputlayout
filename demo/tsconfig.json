@@ -2,23 +2,28 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es5",
-        "experimentalDecorators": true,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": false,
+        "declaration": false,
+        "noLib": false,
         "noEmitHelpers": true,
+        "experimentalDecorators": true,
         "lib": [
-            "es2015"
-        ]
+            "es6",
+            "dom"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "*": [
+                "./node_modules/tns-core-modules/*",
+                "./node_modules/*"
+            ]
+        }
     },
-    "files": [
-        "../manual_typings/base",
-        "../node_modules/typescript/lib/lib.core.d.ts",
-        "node_modules/tns-core-modules/tns-core-modules.d.ts",
-        "node_modules/tns-platform-declarations/android/android17.d.ts",
-        "node_modules/tns-platform-declarations/ios/ios.d.ts",
-        "node_modules/tns-platform-declarations/android/org.nativescript.widgets.d.ts",
-        "app/main-page.ts"
-    ],
     "exclude": [
-        "./node_modules",
-        "./platforms"
+        "node_modules",
+        "platforms"
     ]
 }

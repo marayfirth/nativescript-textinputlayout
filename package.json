@@ -13,9 +13,9 @@
     "build": "tsc",
     "demo.android": "npm run preparedemo; cd demo; tns run android",
     "debug.android": "npm run preparedemo; cd demo; tns debug android --emulator --debug-brk",
-    "demo.ios": "npm run preparedemo; cd demo; tns emulate ios",
+    "demo.ios": "npm run preparedemo; cd demo; tns run ios",
     "debug.ios": "npm run preparedemo; cd demo; tns debug ios --emulator --debug-brk",
-    "preparedemo": "npm run build; cd demo; tns plugin remove ..; tns plugin add ..; tns install",
+    "preparedemo": "npm run build; cd demo; tns plugin remove nativescript-textinputlayout; tns plugin add ..; tns install",
     "setup": "cd demo; npm install; cd ..; npm run build; cd demo; tns plugin add ..; cd .."
   },
   "repository": {
@@ -46,7 +46,7 @@
     "lazy": "1.0.11",
     "tns-core-modules": "^3.0.0",
     "tns-platform-declarations": "^3.0.0",
-    "typescript": "^2.2.2"
+    "typescript": "2.3.4"
   },
   "peerDependencies": {
     "tns-core-modules": "^3.0.0"

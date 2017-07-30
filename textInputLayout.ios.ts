@@ -167,3 +167,21 @@ export class TextInputLayoutWithIcon extends TextInputLayout {
         this._ios = new SkyFloatingLabelTextFieldWithIcon(CGRectMake(0,0,0,0));
     }
 }
+
+hintProperty.register(TextInputLayout);
+errorProperty.register(TextInputLayout);
+errorColorProperty.register(TextInputLayout);
+titleProperty.register(TextInputLayout);
+selectedTitleColorProperty.register(TextInputLayout);
+tintColorProperty.register(TextInputLayout);
+lineColorProperty.register(TextInputLayout);
+selectedLineColorProperty.register(TextInputLayout);
+lineHeightProperty.register(TextInputLayout);
+selectedLineHeightProperty.register(TextInputLayout);
+iconColorProperty.register(TextInputLayout);
+selectedIconColorProperty.register(TextInputLayout);
+iconFontProperty.register(TextInputLayout);
+iconTextProperty.register(TextInputLayout);
+iconMarginBottomProperty.register(TextInputLayout);
+iconMarginLeftProperty.register(TextInputLayout);
+iconRotationDegreesProperty.register(TextInputLayout);

@@ -5,6 +5,9 @@ var view_1 = require("tns-core-modules/ui/core/view");
 var text_view_1 = require("tns-core-modules/ui/text-view");
 var text_field_1 = require("tns-core-modules/ui/text-field");
 function getStyleResourceId(context, name) {
+    if (!context || (name || '').length === 0) {
+        return null;
+    }
     return context.getResources().getIdentifier(name, 'style', context.getPackageName());
 }
 var TextInputLayout = (function (_super) {
@@ -31,6 +34,9 @@ var TextInputLayout = (function (_super) {
     Object.defineProperty(TextInputLayout.prototype, "textField", {
         get: function () { return this._textField; },
         set: function (tf) {
+            if (!this.android) {
+                this._createUI();
+            }
             var old = this._textField;
             if (this._textField) {
                 this._removeView(this._textField);
@@ -65,9 +71,6 @@ var TextInputLayout = (function (_super) {
         }
     };
     TextInputLayout.prototype[textInputLayout_common_1.hintTextAppearanceProperty.setNative] = function (value) {
-        if (value && this.android) {
-            this.android.setHintTextAppearance(getStyleResourceId(this._context, value));
-        }
     };
     TextInputLayout.prototype[textInputLayout_common_1.errorEnabledProperty.setNative] = function (value) {
         if (this.android) {
