@@ -110,6 +110,11 @@ export class TextInputLayout extends CommonTextInputLayout {
         super();
     }
 
+    public createNativeView() {
+        this._createUI();
+        return this.android;
+    }
+
     _createUI() {
         this._android = new android.support.design.widget.TextInputLayout(this._context);
     }

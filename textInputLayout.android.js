@@ -34,9 +34,6 @@ var TextInputLayout = (function (_super) {
     Object.defineProperty(TextInputLayout.prototype, "textField", {
         get: function () { return this._textField; },
         set: function (tf) {
-            if (!this.android) {
-                this._createUI();
-            }
             var old = this._textField;
             if (this._textField) {
                 this._removeView(this._textField);
@@ -71,6 +68,10 @@ var TextInputLayout = (function (_super) {
         }
     };
     TextInputLayout.prototype[textInputLayout_common_1.hintTextAppearanceProperty.setNative] = function (value) {
+        var resourceId = getStyleResourceId(this._context, value);
+        if (value && this.android && resourceId) {
+            this.android.setHintTextAppearance(resourceId);
+        }
     };
     TextInputLayout.prototype[textInputLayout_common_1.errorEnabledProperty.setNative] = function (value) {
         if (this.android) {
@@ -92,6 +93,10 @@ var TextInputLayout = (function (_super) {
         if (this.android) {
             this.android.setCounterEnabled(value);
         }
+    };
+    TextInputLayout.prototype.createNativeView = function () {
+        this._createUI();
+        return this.android;
     };
     TextInputLayout.prototype._createUI = function () {
         this._android = new android.support.design.widget.TextInputLayout(this._context);
