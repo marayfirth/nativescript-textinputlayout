@@ -27,14 +27,14 @@ export const errorProperty = new Property<TextInputLayout, string>({
     name: "error",
     affectsLayout: true
 });
-errorProperty.register(TextInputLayout);
+// errorProperty.register(TextInputLayout);
 
 // NOTE: This is 'placeholder' for ios
 export const hintProperty = new Property<TextInputLayout, string>({
     name: "hint",
     affectsLayout: true
 });
-hintProperty.register(TextInputLayout);
+// hintProperty.register(TextInputLayout);
 
 /*** android-only properties ***/
 export const hintAnimationEnabledProperty = new Property<TextInputLayout, boolean>({
@@ -66,100 +66,100 @@ export const titleProperty = new Property<TextInputLayout, string>({
     name: "title",
     affectsLayout: true
 });
-titleProperty.register(TextInputLayout);
+// titleProperty.register(TextInputLayout);
 
 export const tintColorProperty = new Property<TextInputLayout, Color>({
     name: "tintColor",
     equalityComparer: Color.equals,
     valueConverter: (v) => new Color(v)
 });
-tintColorProperty.register(TextInputLayout);
+// tintColorProperty.register(TextInputLayout);
 
 export const lineColorProperty = new Property<TextInputLayout, Color>({
     name: "lineColor",
     equalityComparer: Color.equals,
     valueConverter: (v) => new Color(v)
 });
-lineColorProperty.register(TextInputLayout);
+// lineColorProperty.register(TextInputLayout);
 
 export const selectedTitleColorProperty = new Property<TextInputLayout, Color>({
     name: "selectedTitleColor",
     equalityComparer: Color.equals,
     valueConverter: (v) => new Color(v)
 });
-selectedTitleColorProperty.register(TextInputLayout);
+// selectedTitleColorProperty.register(TextInputLayout);
 
 export const selectedLineColorProperty = new Property<TextInputLayout, Color>({
     name: "selectedLineColor",
     equalityComparer: Color.equals,
     valueConverter: (v) => new Color(v)
 });
-selectedLineColorProperty.register(TextInputLayout);
+// selectedLineColorProperty.register(TextInputLayout);
 
 export const lineHeightProperty = new Property<TextInputLayout, number>({
     name: "lineHeight",
     affectsLayout: true,
     valueConverter: (v) => Number(v)
 });
-lineHeightProperty.register(TextInputLayout);
+// lineHeightProperty.register(TextInputLayout);
 
 export const selectedLineHeightProperty = new Property<TextInputLayout, number>({
     name: "selectedLineHeight",
     affectsLayout: true,
     valueConverter: (v) => Number(v)
 });
-selectedLineHeightProperty.register(TextInputLayout);
+// selectedLineHeightProperty.register(TextInputLayout);
 
 export const errorColorProperty = new Property<TextInputLayout, Color>({
     name: "errorColor",
     equalityComparer: Color.equals,
     valueConverter: (v) => new Color(v)
 });
-errorColorProperty.register(TextInputLayout);
+// errorColorProperty.register(TextInputLayout);
 
 export const iconColorProperty = new Property<TextInputLayout, Color>({
     name: "iconColor",
     equalityComparer: Color.equals,
     valueConverter: (v) => new Color(v)
 });
-iconColorProperty.register(TextInputLayout);
+// iconColorProperty.register(TextInputLayout);
 
 export const selectedIconColorProperty = new Property<TextInputLayout, Color>({
     name: "selectedIconColor",
     equalityComparer: Color.equals,
     valueConverter: (v) => new Color(v)
 });
-selectedIconColorProperty.register(TextInputLayout);
+// selectedIconColorProperty.register(TextInputLayout);
 
 export const iconFontProperty = new Property<TextInputLayout, UIFont>({
     name: "iconFont",
     affectsLayout: true
 });
-iconFontProperty.register(TextInputLayout);
+// iconFontProperty.register(TextInputLayout);
 
 export const iconTextProperty = new Property<TextInputLayout, string>({
     name: "iconText",
     affectsLayout: true
 });
-iconTextProperty.register(TextInputLayout);
+// iconTextProperty.register(TextInputLayout);
 
 export const iconMarginBottomProperty = new Property<TextInputLayout, number>({
     name: "iconMarginBottom",
     affectsLayout: true,
     valueConverter: (v) => Number(v)
 });
-iconMarginBottomProperty.register(TextInputLayout);
+// iconMarginBottomProperty.register(TextInputLayout);
 
 export const iconMarginLeftProperty = new Property<TextInputLayout, number>({
     name: "iconMarginLeft",
     affectsLayout: true,
     valueConverter: (v) => Number(v)
 });
-iconMarginLeftProperty.register(TextInputLayout);
+// iconMarginLeftProperty.register(TextInputLayout);
 
 export const iconRotationDegreesProperty = new Property<TextInputLayout, number>({
     name: "iconRotationDegrees",
     affectsLayout: true,
     valueConverter: (v) => Number(v)
 });
-iconRotationDegreesProperty.register(TextInputLayout);
+// iconRotationDegreesProperty.register(TextInputLayout);

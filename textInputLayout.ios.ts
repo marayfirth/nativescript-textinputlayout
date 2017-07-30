@@ -155,7 +155,13 @@ export class TextInputLayout extends TextField implements CommonTextInputLayout 
         super();
 
         // TextField delegate will take care of rending to the appropriate size, just pass in zeros here
+        // this._ios = new SkyFloatingLabelTextField(CGRectMake(0, 0, 0, 0));
+    }
+
+    createNativeView() {
+        // TextField delegate will take care of rending to the appropriate size, just pass in zeros here
         this._ios = new SkyFloatingLabelTextField(CGRectMake(0, 0, 0, 0));
+        return this._ios;
     }
 }
 

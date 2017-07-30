@@ -5,9 +5,7 @@ var text_field_1 = require("tns-core-modules/ui/text-field");
 var TextInputLayout = (function (_super) {
     __extends(TextInputLayout, _super);
     function TextInputLayout() {
-        var _this = _super.call(this) || this;
-        _this._ios = new SkyFloatingLabelTextField(CGRectMake(0, 0, 0, 0));
-        return _this;
+        return _super.call(this) || this;
     }
     Object.defineProperty(TextInputLayout.prototype, "ios", {
         get: function () { return this._ios; },
@@ -103,6 +101,10 @@ var TextInputLayout = (function (_super) {
         if (this.ios && !isNaN(value)) {
             this.ios.iconRotationDegrees = value;
         }
+    };
+    TextInputLayout.prototype.createNativeView = function () {
+        this._ios = new SkyFloatingLabelTextField(CGRectMake(0, 0, 0, 0));
+        return this._ios;
     };
     return TextInputLayout;
 }(text_field_1.TextField));

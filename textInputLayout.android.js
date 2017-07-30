@@ -98,6 +98,10 @@ var TextInputLayout = (function (_super) {
         this._createUI();
         return this.android;
     };
+    TextInputLayout.prototype.initNativeView = function () {
+        console.log('hit INIT NATIVE VIEW');
+        _super.prototype.initNativeView.call(this);
+    };
     TextInputLayout.prototype._createUI = function () {
         this._android = new android.support.design.widget.TextInputLayout(this._context);
     };
@@ -131,8 +135,8 @@ var TextInputLayout = (function (_super) {
             this.childLoaded = true;
             this.android.setErrorEnabled(this.errorEnabled);
             this.android.setError(this.error);
-            this.textField.off(view_1.View.loadedEvent, onChildLoaded);
-            this.textField.on(view_1.View.unloadedEvent, onChildUnloaded, this);
+            this.textField.removeEventListener(view_1.View.loadedEvent, onChildLoaded);
+            this.textField.addEventListener(view_1.View.unloadedEvent, onChildUnloaded, this);
             var txtValue = this.textField.android.getText();
             this.textField.android.setText('');
             this.textField.android.setText(txtValue);
@@ -140,13 +144,15 @@ var TextInputLayout = (function (_super) {
         }
         function onChildUnloaded() {
             this.childLoaded = false;
-            this.textField.off(view_1.View.unloadedEvent, onChildUnloaded);
-            this.textField.on(view_1.View.loadedEvent, onChildLoaded, this);
+            this.textField.removeEventListener(view_1.View.unloadedEvent, onChildUnloaded);
+            this.textField.addEventListener(view_1.View.loadedEvent, onChildLoaded, this);
         }
         if (this.textField) {
-            this.textField.on(view_1.View.loadedEvent, onChildLoaded, this);
+            this.textField.addEventListener(view_1.View.loadedEvent, onChildLoaded, this);
         }
     };
     return TextInputLayout;
 }(textInputLayout_common_1.TextInputLayout));
 exports.TextInputLayout = TextInputLayout;
+textInputLayout_common_1.hintProperty.register(TextInputLayout);
+textInputLayout_common_1.errorProperty.register(TextInputLayout);

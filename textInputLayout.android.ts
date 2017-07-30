@@ -25,6 +25,8 @@ export class TextInputLayout extends CommonTextInputLayout {
     _android: any;
     _childLoaded: boolean;
 
+    nativeView: any;
+
     public hintAnimationEnabled ?: boolean;
     public hintTextAppearance ?: string;
     public counterEnabled ?: boolean;
@@ -115,6 +117,11 @@ export class TextInputLayout extends CommonTextInputLayout {
         return this.android;
     }
 
+    public initNativeView() {
+        console.log('hit INIT NATIVE VIEW');
+        super.initNativeView();
+    }
+
     _createUI() {
         this._android = new android.support.design.widget.TextInputLayout(this._context);
     }
@@ -168,8 +175,8 @@ export class TextInputLayout extends CommonTextInputLayout {
 
             this.android.setErrorEnabled(this.errorEnabled);
             this.android.setError(this.error);
-            this.textField.off(View.loadedEvent, onChildLoaded);
-            this.textField.on(View.unloadedEvent, onChildUnloaded, this);
+            this.textField.removeEventListener(View.loadedEvent, onChildLoaded);
+            this.textField.addEventListener(View.unloadedEvent, onChildUnloaded, this);
 
             // sometimes hint text isn't immediately triggered to move when navigating back to a prior view.
             // this triggers it via brute force :(
@@ -182,12 +189,15 @@ export class TextInputLayout extends CommonTextInputLayout {
 
         function onChildUnloaded() {
             this.childLoaded = false;
-            this.textField.off(View.unloadedEvent, onChildUnloaded);
-            this.textField.on(View.loadedEvent, onChildLoaded, this);
+            this.textField.removeEventListener(View.unloadedEvent, onChildUnloaded);
+            this.textField.addEventListener(View.loadedEvent, onChildLoaded, this);
         }
 
         if (this.textField) {
-            this.textField.on(View.loadedEvent, onChildLoaded, this);
+            this.textField.addEventListener(View.loadedEvent, onChildLoaded, this);
         }
     }
 }
+
+hintProperty.register(TextInputLayout);
+errorProperty.register(TextInputLayout);
