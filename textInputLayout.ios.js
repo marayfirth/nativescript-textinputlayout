@@ -75,6 +75,7 @@ var TextInputLayout = (function (_super) {
     TextInputLayout.prototype[textInputLayout_common_1.iconFontProperty.setNative] = function (value) {
         if (this.ios) {
             if (value instanceof UIFont) {
+                console.log('SETTING ICON FONT TO', value);
                 this.ios.iconFont = value;
             }
             else {
@@ -84,6 +85,7 @@ var TextInputLayout = (function (_super) {
     };
     TextInputLayout.prototype[textInputLayout_common_1.iconTextProperty.setNative] = function (value) {
         if (this.ios) {
+            console.log('SETTING ICON TEXT TO ', value);
             this.ios.iconText = value;
         }
     };

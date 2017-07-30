@@ -119,7 +119,8 @@ export class TextInputLayout extends TextField implements CommonTextInputLayout 
 
     [iconFontProperty.setNative](value: UIFont) {
         if (this.ios) {
-            if (value instanceof UIFont) { 
+            if (value instanceof UIFont) {
+                console.log('SETTING ICON FONT TO' , value);
                 this.ios.iconFont = value;
             } else {
                 console.warn('TIL:iconFont can only be set to an instance of UIFont');
@@ -129,6 +130,7 @@ export class TextInputLayout extends TextField implements CommonTextInputLayout 
 
     [iconTextProperty.setNative](value: string) {
         if (this.ios) {
+            console.log('SETTING ICON TEXT TO ', value);
             this.ios.iconText = value;
         }
     }
