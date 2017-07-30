@@ -120,7 +120,6 @@ export class TextInputLayout extends TextField implements CommonTextInputLayout 
     [iconFontProperty.setNative](value: UIFont) {
         if (this.ios) {
             if (value instanceof UIFont) {
-                console.log('SETTING ICON FONT TO' , value);
                 this.ios.iconFont = value;
             } else {
                 console.warn('TIL:iconFont can only be set to an instance of UIFont');
@@ -130,7 +129,6 @@ export class TextInputLayout extends TextField implements CommonTextInputLayout 
 
     [iconTextProperty.setNative](value: string) {
         if (this.ios) {
-            console.log('SETTING ICON TEXT TO ', value);
             this.ios.iconText = value;
         }
     }
@@ -152,10 +150,6 @@ export class TextInputLayout extends TextField implements CommonTextInputLayout 
             this.ios.iconRotationDegrees = value;
         }
     }
-    
-    constructor() {
-        super();
-    }
 
     createNativeView() {
         // TextField delegate will take care of rending to the appropriate size, just pass in zeros here
@@ -165,11 +159,10 @@ export class TextInputLayout extends TextField implements CommonTextInputLayout 
 }
 
 export class TextInputLayoutWithIcon extends TextInputLayout {
-    constructor() {
-        super();
-
+    createNativeView() {
         // TextField delegate will take care of rending to the appropriate size, just pass in zeros here
         this._ios = new SkyFloatingLabelTextFieldWithIcon(CGRectMake(0,0,0,0));
+        return this._ios;
     }
 }
 

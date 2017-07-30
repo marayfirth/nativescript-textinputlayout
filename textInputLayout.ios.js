@@ -5,7 +5,7 @@ var text_field_1 = require("tns-core-modules/ui/text-field");
 var TextInputLayout = (function (_super) {
     __extends(TextInputLayout, _super);
     function TextInputLayout() {
-        return _super.call(this) || this;
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     Object.defineProperty(TextInputLayout.prototype, "ios", {
         get: function () { return this._ios; },
@@ -114,10 +114,12 @@ exports.TextInputLayout = TextInputLayout;
 var TextInputLayoutWithIcon = (function (_super) {
     __extends(TextInputLayoutWithIcon, _super);
     function TextInputLayoutWithIcon() {
-        var _this = _super.call(this) || this;
-        _this._ios = new SkyFloatingLabelTextFieldWithIcon(CGRectMake(0, 0, 0, 0));
-        return _this;
+        return _super !== null && _super.apply(this, arguments) || this;
     }
+    TextInputLayoutWithIcon.prototype.createNativeView = function () {
+        this._ios = new SkyFloatingLabelTextFieldWithIcon(CGRectMake(0, 0, 0, 0));
+        return this._ios;
+    };
     return TextInputLayoutWithIcon;
 }(TextInputLayout));
 exports.TextInputLayoutWithIcon = TextInputLayoutWithIcon;

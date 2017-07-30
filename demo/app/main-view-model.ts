@@ -1,5 +1,5 @@
 import {Observable} from 'data/observable';
-import {device} from 'platform';
+import {isIOS} from 'platform';
 import {Font} from 'ui/styling/font';
 
 export class HelloWorldModel extends Observable {
@@ -14,8 +14,8 @@ export class HelloWorldModel extends Observable {
         this.set('isErrorEnabled', true);
         this.set('isHintAnimationEnabled', true);
         this.set('isCounterEnabled', false);
-        console.log('OS: ', device.os);
-        if (device.os === 'iOS') {
+
+        if (isIOS) {
             this.set('iconFont', Font.default.withFontFamily("FontAwesome").withFontSize(16).getUIFont(null));
             this.set('iconText', '\uf06a');
         }
