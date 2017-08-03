@@ -2,177 +2,190 @@ declare var ios: any;
 declare var SkyFloatingLabelTextField: any;
 declare var SkyFloatingLabelTextFieldWithIcon: any;
 
-import {PropertyChangeData} from 'tns-core-modules/ui/core/dependency-observable';
-import {
-    TextInputLayout as CommonTextInputLayout,
-    hintProperty,
-    errorProperty,
-    errorColorProperty,
-    titleProperty,
-    selectedTitleColorProperty,
-    tintColorProperty,
-    lineColorProperty,
-    selectedLineColorProperty,
-    lineHeightProperty,
-    selectedLineHeightProperty,
-    iconColorProperty,
-    selectedIconColorProperty,
-    iconFontProperty,
-    iconTextProperty,
-    iconMarginBottomProperty,
-    iconMarginLeftProperty,
-    iconRotationDegreesProperty
-} from './textInputLayout.common';
-import {TextField} from 'tns-core-modules/ui/text-field';
-import {Color} from 'tns-core-modules/color';
+import { TextInputLayout as CommonTextInputLayout, hintProperty, errorProperty, Color, Property } from './textInputLayout.common';
+import { Font } from 'tns-core-modules/ui/styling/font';
 
-export class TextInputLayout extends TextField implements CommonTextInputLayout {
-    _ios: any;
-    _childLoaded: boolean;
+// note: this is the floating label value 
+export const titleProperty = new Property<TextInputLayout, string>({
+    name: "title", affectsLayout: true
+});
 
-    public error: string;
-    public title : string;
-    public tintColor : Color;
-    public lineColor : Color;
-    public selectedTintColor : Color;
-    public selectedLineColor : Color;
-    public selectedTitleColor : Color;
-    public lineHeight : number;
-    public selectedLineHeight : number;
-    public errorColor : Color;
-    public iconColor : Color;
-    public selectedIconColor : Color;
-    public iconFont : string;
-    public iconText : string;
-    public iconMarginBottom : number;
-    public iconMarginLeft : number;
-    public iconRotationDegrees : number;
+export const tintColorProperty = new Property<TextInputLayout, Color>({
+    name: "tintColor",
+    equalityComparer: Color.equals,
+    valueConverter: v => new Color(v)
+});
 
-    get ios() {return this._ios;}
-    get _nativeView() {return this._ios;}
+export const lineColorProperty = new Property<TextInputLayout, Color>({
+    name: "lineColor",
+    equalityComparer: Color.equals,
+    valueConverter: v => new Color(v)
+});
+
+export const selectedTitleColorProperty = new Property<TextInputLayout, Color>({
+    name: "selectedTitleColor",
+    equalityComparer: Color.equals,
+    valueConverter: v => new Color(v)
+});
+
+export const selectedLineColorProperty = new Property<TextInputLayout, Color>({
+    name: "selectedLineColor",
+    equalityComparer: Color.equals,
+    valueConverter: v => new Color(v)
+});
+
+export const lineHeightProperty = new Property<TextInputLayout, number>({
+    name: "lineHeight",
+    affectsLayout: true,
+    valueConverter: v => parseFloat(v)
+});
+
+export const selectedLineHeightProperty = new Property<TextInputLayout, number>({
+    name: "selectedLineHeight",
+    affectsLayout: true,
+    valueConverter: v => parseFloat(v)
+});
+
+export const errorColorProperty = new Property<TextInputLayout, Color>({
+    name: "errorColor",
+    equalityComparer: Color.equals,
+    valueConverter: v => new Color(v)
+});
+
+export const iconColorProperty = new Property<TextInputLayout, Color>({
+    name: "iconColor",
+    equalityComparer: Color.equals,
+    valueConverter: v => new Color(v)
+});
+
+export const selectedIconColorProperty = new Property<TextInputLayout, Color>({
+    name: "selectedIconColor",
+    equalityComparer: Color.equals,
+    valueConverter: v => new Color(v)
+});
+
+export const iconFontProperty = new Property<TextInputLayout, UIFont>({
+    name: "iconFont",
+    affectsLayout: true
+});
+
+export const iconTextProperty = new Property<TextInputLayout, string>({
+    name: "iconText",
+    affectsLayout: true
+});
+
+export const iconMarginBottomProperty = new Property<TextInputLayout, number>({
+    name: "iconMarginBottom",
+    affectsLayout: true,
+    valueConverter: v => parseInt(v)
+});
+
+export const iconMarginLeftProperty = new Property<TextInputLayout, number>({
+    name: "iconMarginLeft",
+    affectsLayout: true,
+    valueConverter: v => parseInt(v)
+});
+
+export const iconRotationDegreesProperty = new Property<TextInputLayout, number>({
+    name: "iconRotationDegrees",
+    affectsLayout: true,
+    valueConverter: v => parseFloat(v)
+});
+
+export class TextInputLayout extends CommonTextInputLayout {
+
+    createNativeView() {
+        // TextField delegate will take care of rending to the appropriate size, just pass in zeros here
+        return new SkyFloatingLabelTextField(CGRectMake(0, 0, 0, 0));
+    }
 
     [hintProperty.setNative](value: string) {
-        if (this.ios) {
-            this.ios.placeholder = value;
-        }
+        this.nativeView.placeholder = value;
     }
 
     [errorProperty.setNative](value: string) {
-        if (this.ios) {
-            this.ios.errorMessage = value;
-        }
+        this.nativeView.errorMessage = value;
     }
 
     [errorColorProperty.setNative](value: Color) {
-        if (this.ios && value.ios) {
-            this.ios.errorColor = value.ios;
-        }
+        this.nativeView.errorColor = value instanceof Color ? value.ios : value;
     }
 
     [titleProperty.setNative](value: string) {
-        if (this.ios) {
-            this.ios.title = value;
-        }
+        this.nativeView.title = value;
     }
 
     [selectedTitleColorProperty.setNative](value: Color) {
-        if (this.ios && value.ios) {
-            this.ios.tintColor = value.ios;
-        }
+        this.nativeView.tintColor = value instanceof Color ? value.ios : value;
     }
 
     [lineColorProperty.setNative](value: Color) {
-        if (this.ios && value.ios) {
-            this.ios.lineColor = value.ios;
-        }
+        this.nativeView.lineColor = value instanceof Color ? value.ios : value;
     }
 
     [selectedLineColorProperty.setNative](value: Color) {
-        if (this.ios && value.ios) {
-            this.ios.selectedLineColor = value.ios;
-        }
+        this.nativeView.selectedLineColor = value instanceof Color ? value.ios : value;
     }
 
     [lineHeightProperty.setNative](value: number) {
-        if (this.ios && !isNaN(value)) {
-            this.ios.lineHeight = value;
+        if (!isNaN(value)) {
+            this.nativeView.lineHeight = value;
         }
     }
 
     [selectedLineHeightProperty.setNative](value: number) {
-        if (this.ios && !isNaN(value)) {
-            this.ios.selectedLineHeight = value;
+        if (!isNaN(value)) {
+            this.nativeView.selectedLineHeight = value;
         }
     }
 
     [iconColorProperty.setNative](value: Color) {
-        if (this.ios && value.ios) {
-            this.ios.iconColor = value.ios;
-        }
+        this.nativeView.iconColor = value instanceof Color ? value.ios : value;
     }
 
     [selectedIconColorProperty.setNative](value: Color) {
-        if (this.ios && value.ios) {
-            this.ios.selectedIconColor = value.ios;
-        }
+        this.nativeView.selectedIconColor = value instanceof Color ? value.ios : value;;
     }
 
     [iconFontProperty.setNative](value: UIFont) {
-        if (this.ios) {
-            if (value instanceof UIFont) {
-                this.ios.iconFont = value;
-            } else {
-                console.warn('TIL:iconFont can only be set to an instance of UIFont');
-            }
-        }
+        this.nativeView.iconFont = value;
     }
 
     [iconTextProperty.setNative](value: string) {
-        if (this.ios) {
-            this.ios.iconText = value;
-        }
+        this.nativeView.iconText = value;
     }
 
     [iconMarginBottomProperty.setNative](value: number) {
-        if (this.ios && !isNaN(value)) {
-            this.ios.iconMarginBottom = value;
+        if (!isNaN(value)) {
+            this.nativeView.iconMarginBottom = value;
         }
     }
 
     [iconMarginLeftProperty.setNative](value: number) {
-        if (this.ios && !isNaN(value)) {
-            this.ios.iconMarginLeft = value;
+        if (!isNaN(value)) {
+            this.nativeView.iconMarginLeft = value;
         }
     }
 
     [iconRotationDegreesProperty.setNative](value: number) {
-        if (this.ios && !isNaN(value)) {
-            this.ios.iconRotationDegrees = value;
+        if (!isNaN(value)) {
+            this.nativeView.iconRotationDegrees = value;
         }
-    }
-
-    createNativeView() {
-        // TextField delegate will take care of rending to the appropriate size, just pass in zeros here
-        this._ios = new SkyFloatingLabelTextField(CGRectMake(0, 0, 0, 0));
-        return this._ios;
     }
 }
 
 export class TextInputLayoutWithIcon extends TextInputLayout {
     createNativeView() {
         // TextField delegate will take care of rending to the appropriate size, just pass in zeros here
-        this._ios = new SkyFloatingLabelTextFieldWithIcon(CGRectMake(0,0,0,0));
-        return this._ios;
+        return new SkyFloatingLabelTextFieldWithIcon(CGRectMake(0, 0, 0, 0));
     }
 }
 
-hintProperty.register(TextInputLayout);
-errorProperty.register(TextInputLayout);
 errorColorProperty.register(TextInputLayout);
 titleProperty.register(TextInputLayout);
-selectedTitleColorProperty.register(TextInputLayout);
 tintColorProperty.register(TextInputLayout);
 lineColorProperty.register(TextInputLayout);
+selectedTitleColorProperty.register(TextInputLayout);
 selectedLineColorProperty.register(TextInputLayout);
 lineHeightProperty.register(TextInputLayout);
 selectedLineHeightProperty.register(TextInputLayout);
