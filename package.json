@@ -1,6 +1,6 @@
 {
   "name": "nativescript-textinputlayout",
-  "version": "0.1.5",
+  "version": "2.0.0",
   "description": "A NativeScript plugin to provide an XML widget to implement the Material Design TextInputLayout.",
   "main": "textInputLayout",
   "nativescript": {
