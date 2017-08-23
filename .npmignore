@@ -1,7 +1,13 @@
 demo/
 *.png
 *.gif
+*.map
 *.log
+*.ts
+!textInputLayout.d.ts
+tsconfig.json
+CONTRIBUTING.md
+README.md
 
 # IDEs
 .vscode/
