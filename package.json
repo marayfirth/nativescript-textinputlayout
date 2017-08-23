@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "A NativeScript plugin to provide an XML widget to implement the Material Design TextInputLayout.",
   "main": "textInputLayout",
+  "typings": "textInputLayout.d.ts",
   "nativescript": {
     "platforms": {
       "android": "3.0.0",
