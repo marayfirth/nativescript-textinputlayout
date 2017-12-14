@@ -19,6 +19,9 @@ exports.hintTextAppearanceProperty = new textInputLayout_common_1.Property({
 exports.counterEnabledProperty = new textInputLayout_common_1.Property({
     name: "counterEnabled", affectsLayout: true, valueConverter: view_1.booleanConverter
 });
+exports.errorTextAppearanceProperty = new textInputLayout_common_1.Property({
+    name: "errorTextAppearance"
+});
 exports.errorEnabledProperty = new textInputLayout_common_1.Property({
     name: "errorEnabled", affectsLayout: true, valueConverter: view_1.booleanConverter
 });
@@ -99,6 +102,12 @@ var TextInputLayout = (function (_super) {
             this.nativeView.setHintTextAppearance(resourceId);
         }
     };
+    TextInputLayout.prototype[exports.errorTextAppearanceProperty.setNative] = function (value) {
+        var resourceId = getStyleResourceId(this._context, value);
+        if (value && resourceId) {
+            this.nativeView.setErrorTextAppearance(resourceId);
+        }
+    };
     TextInputLayout.prototype[exports.errorEnabledProperty.setNative] = function (value) {
         if (!value && (this.error || '').length > 0) {
             this.error = '';
@@ -119,5 +128,6 @@ var TextInputLayout = (function (_super) {
 exports.TextInputLayout = TextInputLayout;
 exports.hintAnimationEnabledProperty.register(TextInputLayout);
 exports.hintTextAppearanceProperty.register(TextInputLayout);
+exports.errorTextAppearanceProperty.register(TextInputLayout);
 exports.counterEnabledProperty.register(TextInputLayout);
 exports.errorEnabledProperty.register(TextInputLayout);
