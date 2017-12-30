@@ -1,18 +1,18 @@
 {
   "nativescript": {
     "id": "com.bradleygore.tildemo",
-    "tns-ios": {
-      "version": "3.1.0"
-    },
     "tns-android": {
-      "version": "3.1.1"
+      "version": "3.4.0"
+    },
+    "tns-ios": {
+      "version": "3.4.0"
     }
   },
   "dependencies": {
+    "nativescript-swift-3.0": "^1.0.0",
     "nativescript-textinputlayout": "file:///Users/bradley/Documents/projects/personal/nativescript-textinputlayout",
     "nativescript-theme-core": "^0.2.1",
-    "tns-core-modules": "^3.1.0",
-    "tns-ios": "3.1.0"
+    "tns-core-modules": "^3.4.0"
   },
   "devDependencies": {
     "babel-traverse": "6.22.1",

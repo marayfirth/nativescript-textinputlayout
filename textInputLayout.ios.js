@@ -1,8 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var text_field_1 = require("ui/text-field");
+var view_1 = require("ui/core/view");
 var textInputLayout_common_1 = require("./textInputLayout.common");
+exports.disabledColorProperty = new textInputLayout_common_1.Property({
+    name: 'disabledColor',
+    equalityComparer: textInputLayout_common_1.Color.equals,
+    valueConverter: function (v) { return new textInputLayout_common_1.Color(v); }
+});
+exports.hintProperty = new textInputLayout_common_1.Property({
+    name: "hint",
+    affectsLayout: true
+});
 exports.titleProperty = new textInputLayout_common_1.Property({
     name: "title", affectsLayout: true
+});
+exports.titleFontProperty = new textInputLayout_common_1.Property({
+    name: "titleFont",
+    affectsLayout: true
 });
 exports.tintColorProperty = new textInputLayout_common_1.Property({
     name: "tintColor",
@@ -33,6 +48,10 @@ exports.selectedLineHeightProperty = new textInputLayout_common_1.Property({
     name: "selectedLineHeight",
     affectsLayout: true,
     valueConverter: function (v) { return parseFloat(v); }
+});
+exports.errorProperty = new textInputLayout_common_1.Property({
+    name: "error",
+    affectsLayout: true
 });
 exports.errorColorProperty = new textInputLayout_common_1.Property({
     name: "errorColor",
@@ -78,12 +97,21 @@ var TextInputLayout = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     TextInputLayout.prototype.createNativeView = function () {
-        return new SkyFloatingLabelTextField(CGRectMake(0, 0, 0, 0));
+        var nativeView = new SkyFloatingLabelTextField(CGRectMake(0, 0, 0, 0));
+        this._ios = this.nativeView = nativeView;
+        return nativeView;
     };
-    TextInputLayout.prototype[textInputLayout_common_1.hintProperty.setNative] = function (value) {
+    TextInputLayout.prototype[view_1.isEnabledProperty.setNative] = function (value) {
+        text_field_1.TextField.prototype[view_1.isEnabledProperty.setNative].call(this, value);
+        this.nativeView.isEnabled = value;
+    };
+    TextInputLayout.prototype[exports.disabledColorProperty.setNative] = function (value) {
+        this.nativeView.disabledColor = value instanceof textInputLayout_common_1.Color ? value.ios : value;
+    };
+    TextInputLayout.prototype[exports.hintProperty.setNative] = function (value) {
         this.nativeView.placeholder = value;
     };
-    TextInputLayout.prototype[textInputLayout_common_1.errorProperty.setNative] = function (value) {
+    TextInputLayout.prototype[exports.errorProperty.setNative] = function (value) {
         this.nativeView.errorMessage = value;
     };
     TextInputLayout.prototype[exports.errorColorProperty.setNative] = function (value) {
@@ -91,6 +119,9 @@ var TextInputLayout = (function (_super) {
     };
     TextInputLayout.prototype[exports.titleProperty.setNative] = function (value) {
         this.nativeView.title = value;
+    };
+    TextInputLayout.prototype[exports.titleFontProperty.setNative] = function (value) {
+        this.nativeView.titleFont = value;
     };
     TextInputLayout.prototype[exports.selectedTitleColorProperty.setNative] = function (value) {
         this.nativeView.tintColor = value instanceof textInputLayout_common_1.Color ? value.ios : value;
@@ -140,7 +171,7 @@ var TextInputLayout = (function (_super) {
         }
     };
     return TextInputLayout;
-}(textInputLayout_common_1.TextInputLayout));
+}(text_field_1.TextField));
 exports.TextInputLayout = TextInputLayout;
 var TextInputLayoutWithIcon = (function (_super) {
     __extends(TextInputLayoutWithIcon, _super);
@@ -148,11 +179,16 @@ var TextInputLayoutWithIcon = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     TextInputLayoutWithIcon.prototype.createNativeView = function () {
-        return new SkyFloatingLabelTextFieldWithIcon(CGRectMake(0, 0, 0, 0));
+        var nativeView = new SkyFloatingLabelTextFieldWithIcon(CGRectMake(0, 0, 0, 0));
+        this._ios = this.nativeView = nativeView;
+        return nativeView;
     };
     return TextInputLayoutWithIcon;
 }(TextInputLayout));
 exports.TextInputLayoutWithIcon = TextInputLayoutWithIcon;
+exports.disabledColorProperty.register(TextInputLayout);
+exports.hintProperty.register(TextInputLayout);
+exports.errorProperty.register(TextInputLayout);
 exports.errorColorProperty.register(TextInputLayout);
 exports.titleProperty.register(TextInputLayout);
 exports.tintColorProperty.register(TextInputLayout);

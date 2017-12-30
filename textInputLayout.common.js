@@ -3,7 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var color_1 = require("tns-core-modules/color");
 exports.Color = color_1.Color;
 var view_1 = require("tns-core-modules/ui/core/view");
-exports.Property = view_1.Property;
+var properties_1 = require("tns-core-modules/ui/core/properties");
+exports.Property = properties_1.Property;
 var TextInputLayout = (function (_super) {
     __extends(TextInputLayout, _super);
     function TextInputLayout() {
@@ -12,12 +13,12 @@ var TextInputLayout = (function (_super) {
     return TextInputLayout;
 }(view_1.View));
 exports.TextInputLayout = TextInputLayout;
-exports.errorProperty = new view_1.Property({
+exports.errorProperty = new properties_1.Property({
     name: "error",
     affectsLayout: true
 });
 exports.errorProperty.register(TextInputLayout);
-exports.hintProperty = new view_1.Property({
+exports.hintProperty = new properties_1.Property({
     name: "hint",
     affectsLayout: true
 });
