@@ -8,6 +8,7 @@ declare namespace android {
                     setError(error: string): void;
                     setHintAnimationEnabled(value: boolean): void;
                     setHintTextAppearance(resourceId: number): void;
+                    setErrorTextAppearance(resourceId: number): void;
                     setErrorEnabled(enabled: boolean): void;
                     setCounterEnabled(enabled: boolean): void;
                     addView(child, index: number, params): void;
@@ -43,6 +44,10 @@ export const hintTextAppearanceProperty = new Property<TextInputLayout, string>(
 
 export const counterEnabledProperty = new Property<TextInputLayout, boolean>({
     name: "counterEnabled", affectsLayout: true, valueConverter: booleanConverter
+});
+
+export const errorTextAppearanceProperty = new Property<TextInputLayout, string>({
+    name: "errorTextAppearance"
 });
 
 export const errorEnabledProperty = new Property<TextInputLayout, boolean>({
@@ -143,6 +148,13 @@ export class TextInputLayout extends CommonTextInputLayout {
         }
     }
 
+    [errorTextAppearanceProperty.setNative](value: string) {
+        const resourceId = getStyleResourceId(this._context, value);
+        if (value && resourceId) {
+            this.nativeView.setErrorTextAppearance(resourceId);
+        }
+    }
+
     [errorEnabledProperty.setNative](value: boolean) {
         if (!value && (this.error || '').length > 0) {
             this.error = '';
@@ -165,5 +177,6 @@ export class TextInputLayout extends CommonTextInputLayout {
 
 hintAnimationEnabledProperty.register(TextInputLayout);
 hintTextAppearanceProperty.register(TextInputLayout);
+errorTextAppearanceProperty.register(TextInputLayout);
 counterEnabledProperty.register(TextInputLayout);
 errorEnabledProperty.register(TextInputLayout);

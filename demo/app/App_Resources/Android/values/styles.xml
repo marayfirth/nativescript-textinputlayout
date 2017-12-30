@@ -4,7 +4,11 @@
         <item name="android:textColor">@color/darkBlue</item>
         <item name="android:textSize">12dp</item>
     </style>
-    
+    <style name="StyledTILError" parent="@android:style/TextAppearance">
+         <item name="android:textStyle">bold|italic</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">12dp</item>
+    </style>
     <!-- theme to use FOR launch screen-->
     <style name="LaunchScreenThemeBase" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="toolbarStyle">@style/NativeScriptToolbarStyle</item>

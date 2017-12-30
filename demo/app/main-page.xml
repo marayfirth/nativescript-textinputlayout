@@ -11,6 +11,7 @@
                 android:hintAnimationEnabled="{{ isHintAnimationEnabled }}"
                 android:counterEnabled="{{ isCounterEnabled }}"
                 android:hintTextAppearance="StyledTIL"
+                android:errorTextAppearance="StyledTILError"
                 style="font-family: Arvo-Bold;"
                 >
                 <TextField text="{{ demoText }}" style="font-family: Arvo-Bold;"/>

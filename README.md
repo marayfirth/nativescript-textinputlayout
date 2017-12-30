@@ -26,6 +26,7 @@ The android and iOS implementations, while very similar in effect, have several 
             errorEnabled="{{ isErrorEnabled }}"
             hintAnimationEnabled="{{ isHintAnimationEnabled }}"
             hintTextAppearance="SpecialTextInputLayout"
+            errorTextAppearance="SpecialErrorTextInputLayout"
             counterEnabled="{{ isCounterEnabled }}">
 
             <!--ONE child element can be added, MUST be either TextField or TextView-->
@@ -49,6 +50,7 @@ error | Text that will display as error message and make the widget look invalid
 errorEnabled | Whether or not an error is enabled for the widget.  If no error, it won't pad the bottom so much.  However, if you set the error attr, it auto-sets this property under the hood to true | Boolean | false
 hintAnimationEnabled | Whether or not the 'float' action of the label should be animated | Boolean | true
 hintTextAppearance | Name of the style definition to apply to the floating label | String | ""
+errorTextAppearance | Name of the style definition to apply to the error message | String | ""
 counterEnabled | Whether or not a char counter should display in bottom-right of widget | Boolean | false
 
 #### Styling
@@ -64,6 +66,10 @@ Simply create a style rule, such as the one below, and set the TextInputLayout's
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <style name="SpecialTextInputLayout" parent="@android:style/TextAppearance">
         <item name="android:textColor">#F9D02A</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+    <style name="SpecialErrorTextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#FF0000</item>
         <item name="android:textSize">12dp</item>
     </style>
 </resources>

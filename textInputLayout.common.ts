@@ -13,6 +13,7 @@ export class TextInputLayout extends View implements TextInputLayoutDefinition {
     //ANDROID ONLY
     public hintAnimationEnabled?: boolean;
     public hintTextAppearance?: string;
+    public errorTextAppearance?: string;
     public counterEnabled?: boolean;
     public errorEnabled?: boolean;
 
