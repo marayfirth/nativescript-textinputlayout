@@ -7,10 +7,6 @@ import { TextField } from 'ui/text-field';
 import { isEnabledProperty } from 'ui/core/view';
 import { TextInputLayout as CommonTextInputLayout, Color, Property } from './textInputLayout.common';
 
-// export const enabledProperty = new Property<TextInputLayout, Boolean>({
-//     name: 'enabled', defaultValue: false, affectsLayout: true
-// });
-
 export const disabledColorProperty = new Property<TextInputLayout, Color>({
     name: 'disabledColor',
     equalityComparer: Color.equals,
@@ -137,13 +133,6 @@ export class TextInputLayout extends TextField implements CommonTextInputLayout 
     [isEnabledProperty.setNative](value: Boolean) {
         TextField.prototype[isEnabledProperty.setNative].call(this, value);
         this.nativeView.isEnabled = value;
-        // if we have a disabledColor, and we're not enabled, set it anew on the native control
-        // let disColor = this.disabledColor;
-        // if (!value && disColor) {
-        //     console.log(`SETTING DISABLED COLOR: ${disColor}`);
-        //     let color = disColor instanceof Color ? disColor.ios : this.disabledColor;
-        //     this.nativeView.disabledColor = color;
-        // }
     }
 
     [disabledColorProperty.setNative](value: Color) {
