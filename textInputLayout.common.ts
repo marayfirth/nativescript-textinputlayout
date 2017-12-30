@@ -1,6 +1,7 @@
 import { TextInputLayout as TextInputLayoutDefinition } from './textInputLayout';
 import { Color } from "tns-core-modules/color";
-import { View, Property } from "tns-core-modules/ui/core/view";
+import { View } from "tns-core-modules/ui/core/view";
+import { Property } from 'tns-core-modules/ui/core/properties'
 
 export { Property, Color };
 
@@ -17,6 +18,7 @@ export class TextInputLayout extends View implements TextInputLayoutDefinition {
     public errorEnabled?: boolean;
 
     //IOS Only
+    public disabledColor?: Color;
     public title?: string;
     public tintColor?: Color;
     public lineColor?: Color;
