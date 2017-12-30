@@ -82,15 +82,19 @@ To run the demo locally, run the following commands from the root folder after p
 
 ## iOS
 
-The pod in use for the iOS functionality actually allows for a bit nicer markup as it extends UITextField, which NativeScript already has a wrapper for. So, instead of a `TextInpuLayout` that wraps a `TextField`, we just need a single element and we get to take advantage of all the normal `TextField` bindings that comes from NativeScript! Note, however, that there are two different kinds of inputs:
+The pod in use - `pod 'SkyFloatingLabelTextField', '~> 3.3.0'` -  for the iOS functionality actually allows for a bit nicer markup as it extends UITextField, which NativeScript already has a wrapper for. So, instead of a `TextInpuLayout` that wraps a `TextField`, we just need a single element and we get to take advantage of all the normal `TextField` bindings that comes from NativeScript! Note, however, that there are two different kinds of inputs:
 
 * `TextInputLayout` - standard input with floating label, error message capability, etc..
 * `TextInputLayoutWithIcon` - same as above, with addition of an icon and icon-related properties..
+
+*NOTE*: This pod relies on Swift 3.0, so I ended up using the [NativeScript Swift 3.0 Plugin](https://github.com/naderio/nativescript-swift-3.0) for this.
 
 ```xml
 
 <TIL:TextInputLayout
     hint="{{ hint }}"
+    isEnabled="{{ isEnabled }}"
+    disabledColor="#c3c3c3"
     error="{{ error }}"
     text="{{ demoText }}"
     title="{{ title }}"
@@ -131,6 +135,8 @@ The pod in use for the iOS functionality actually allows for a bit nicer markup 
 Name | Description | Value Type | Default
 -----|-------------|------------|---------
 hint | Text that shows up in the text field's placeholder area | String | ""
+isDisabled | Dictates if field is disabled | Boolean | false
+disabledColor | Field overall color (label, underline, text) when it's disabled | String | ""
 error | Text that will display as error message and make the widget look invalid | String | ""
 title | Text that will display in the 'floating label' when there is a value in the field (`hint` value used if nothing supplied) | String | ""
 tintColor | Color of the blinking cursor when field focused | String | ""
