@@ -47,10 +47,12 @@
             <TIL:TextInputLayout
                 class="til demo-text-inputlayout"
                 hint="{{ hint }}"
-                error="{{ error }}"
+                isEnabled="{{ !isDisabled }}"
+                disabledColor="#c3c3c3"
+                error="{{ errorMsg }}"
                 text="{{ demoText }}"
                 title="{{ title }}"
-                color="{{ error ? '#aa0000' : '#d745ff' }}"
+                color="{{ errorMsg &amp;&amp; errorMsg.length &gt; 0 ? '#aa0000' : '#d745ff' }}"
                 tintColor="#d745ff"
                 lineColor="#d745ff"
                 selectedTitleColor="#ff45ca"
@@ -60,7 +62,7 @@
 
             <Label class="divider" />
 
-            <Label horizontalAlignment="center" text="Change hint/error/title Properties" />
+            <Label horizontalAlignment="center" text="Change Properties" />
 
             <TIL:TextInputLayout
                 class="demo-text-inputlayout"
@@ -74,6 +76,8 @@
                 lineHeight="0.5"
                 selectedLineHeight="1" />
 
+            <Label class="divider" />
+
             <TIL:TextInputLayout
                 class="demo-text-inputlayout"
                 hint="Gimme A Hint!"
@@ -86,10 +90,12 @@
                 lineHeight="0.5"
                 selectedLineHeight="1" />
 
+            <Label class="divider" />
+
             <TIL:TextInputLayoutWithIcon
                 class="demo-text-inputlayout"
                 hint="Is there an error?"
-                text="{{ error }}"
+                text="{{ errorMsg }}"
                 iconFont="{{ iconFont }}"
                 iconText="{{ iconText }}"
                 iconColor="#48c8ff"
@@ -104,6 +110,13 @@
                 selectedLineColor="#48ff7f"
                 lineHeight="0.5"
                 selectedLineHeight="1" />
+
+            <Label class="divider" />
+
+            <GridLayout rows="auto" columns="2*, *" style="padding: 5;">
+                <Label row="0" col="0" text="Disabled" />
+                <Switch row="0" col="1" checked="{{ isDisabled }}" />
+            </GridLayout>
         </StackLayout>
     </ios>
   

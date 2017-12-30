@@ -1,16 +1,16 @@
-import observable = require("data/observable");
-import pages = require("ui/page");
-import vmModule = require("./main-view-model");
-import frame = require('ui/frame');
+import {EventData} from "tns-core-modules/data/observable";
+import {Page} from "ui/page";
+import viewModel from "./main-view-model";
+import {topmost as topMostFrame} from 'ui/frame';
 import {Font} from 'ui/styling/font';
 
 // Event handler for Page "loaded" event attached in main-page.xml
-export function pageLoaded(args: observable.EventData) {
+export function pageLoaded(args: EventData) {
     // Get the event sender
-    var page = <pages.Page>args.object;
-    page.bindingContext = vmModule.mainViewModel;
+    var page = <Page>args.object;
+    page.bindingContext = viewModel;
 }
 
 export function seeMore() {
-    frame.topmost().navigate('multi-til-demo');
+    topMostFrame().navigate('multi-til-demo');
 }
