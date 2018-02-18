@@ -123,8 +123,11 @@ var TextInputLayout = (function (_super) {
     TextInputLayout.prototype[exports.titleFontProperty.setNative] = function (value) {
         this.nativeView.titleFont = value;
     };
-    TextInputLayout.prototype[exports.selectedTitleColorProperty.setNative] = function (value) {
+    TextInputLayout.prototype[exports.tintColorProperty.setNative] = function (value) {
         this.nativeView.tintColor = value instanceof textInputLayout_common_1.Color ? value.ios : value;
+    };
+    TextInputLayout.prototype[exports.selectedTitleColorProperty.setNative] = function (value) {
+        this.nativeView.selectedTitleColor = value instanceof textInputLayout_common_1.Color ? value.ios : value;
     };
     TextInputLayout.prototype[exports.lineColorProperty.setNative] = function (value) {
         this.nativeView.lineColor = value instanceof textInputLayout_common_1.Color ? value.ios : value;

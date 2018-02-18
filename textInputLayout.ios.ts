@@ -159,8 +159,12 @@ export class TextInputLayout extends TextField implements CommonTextInputLayout 
         this.nativeView.titleFont = value;
     }
 
-    [selectedTitleColorProperty.setNative](value: Color) {
+    [tintColorProperty.setNative](value: Color) {
         this.nativeView.tintColor = value instanceof Color ? value.ios : value;
+    }
+
+    [selectedTitleColorProperty.setNative](value: Color) {
+        this.nativeView.selectedTitleColor = value instanceof Color ? value.ios : value;
     }
 
     [lineColorProperty.setNative](value: Color) {
