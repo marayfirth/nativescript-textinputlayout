@@ -1,6 +1,6 @@
 {
   "name": "nativescript-textinputlayout",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "A NativeScript plugin to provide an XML widget to implement the Material Design TextInputLayout.",
   "main": "textInputLayout",
   "typings": "textInputLayout.d.ts",
@@ -40,6 +40,7 @@
   "bugs": "https://github.com/bradleygore/nativescript-textinputlayout/issues",
   "homepage": "https://github.com/bradleygore/nativescript-textinputlayout",
   "readmeFilename": "README.md",
+  "readme": "../README.md",
   "devDependencies": {
     "babel-traverse": "^6.26.0",
     "babel-types": "6.22.0",
