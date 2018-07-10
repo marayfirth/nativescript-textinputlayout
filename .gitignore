@@ -23,9 +23,6 @@ demo/platforms
 demo/node_modules
 demo/hooks
 
-# Platforms (NS Managed)
-platforms
-
 # IDEs
 .vscode/
 .idea/
