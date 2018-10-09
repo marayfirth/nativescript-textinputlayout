@@ -7,6 +7,15 @@
 
 ----------
 
+## NO LONGER MAINTAINED
+
+When I built this plugin, I was exploring NativeScript a lot in my spare time for fun. I currently do not have the spare time I used to have, so I will no longer be maintaining this plugin. PRs are welcome, or if you wish to take over maintenance submit an issue with your information and I'll contact you.
+
+\- Bradley
+
+
+----------
+
 ## Usage
 
 Install the plugin by running this command in your project root:
