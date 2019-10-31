@@ -65,7 +65,7 @@ var TextInputLayout = (function (_super) {
         }
     };
     TextInputLayout.prototype.createNativeView = function () {
-        return new android.support.design.widget.TextInputLayout(this._context);
+        return new com.google.android.material.textfield.TextInputLayout(this._context);
     };
     TextInputLayout.prototype.onLoaded = function () {
         _super.prototype.onLoaded.call(this);

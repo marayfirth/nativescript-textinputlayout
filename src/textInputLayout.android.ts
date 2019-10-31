@@ -97,7 +97,7 @@ export class TextInputLayout extends CommonTextInputLayout {
     }
 
     public createNativeView() {
-        return new android.support.design.widget.TextInputLayout(this._context);
+        return new com.google.android.material.textfield.TextInputLayout(this._context);
     }
 
     public onLoaded(): void {
