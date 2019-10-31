@@ -20,6 +20,20 @@ declare namespace android {
     }
 }
 
+declare namespace com{
+    namespace google {
+        namespace android {
+            namespace material {
+                namespace textfield {
+                    class TextInputLayout {
+                        constructor(context: any);
+                    }
+                }
+            }
+        }
+    }
+}
+
 import { TextInputLayout as CommonTextInputLayout, hintProperty, errorProperty, Property } from './textInputLayout.common';
 
 import { View, booleanConverter } from "tns-core-modules/ui/core/view";
