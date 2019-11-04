@@ -26,3 +26,10 @@ demo/hooks
 # IDEs
 .vscode/
 .idea/
+
+node_modules
+publish/src
+publish/package
+
+*.js
+!src/scripts/*.js
