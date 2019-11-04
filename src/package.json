@@ -1,6 +1,6 @@
 {
-  "name": "nativescript-textinputlayout",
-  "version": "2.0.7",
+  "name": "@marayfirth/nativescript-textinputlayout",
+  "version": "2.0.8",
   "description": "A NativeScript plugin to provide an XML widget to implement the Material Design TextInputLayout.",
   "main": "textInputLayout",
   "typings": "textInputLayout.d.ts",
@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bradleygore/nativescript-textinputlayout"
+    "url": "https://github.com/marayfirth/nativescript-textinputlayout"
   },
   "keywords": [
     "NativeScript",
